@@ -1,10 +1,10 @@
 package com.mazzeom.app.armstrong.root
 
 import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
-import com.mazzeom.app.armstrong.main.MainBuilder
-import com.mazzeom.app.armstrong.main.MainRouter
-import com.mazzeom.app.armstrong.sign_in.SignInBuilder
-import com.mazzeom.app.armstrong.sign_in.SignInRouter
+import com.mazzeom.app.armstrong.root.main.MainBuilder
+import com.mazzeom.app.armstrong.root.main.MainRouter
+import com.mazzeom.app.armstrong.root.sign_in.SignInBuilder
+import com.mazzeom.app.armstrong.root.sign_in.SignInRouter
 
 import com.uber.rib.core.ViewRouter
 

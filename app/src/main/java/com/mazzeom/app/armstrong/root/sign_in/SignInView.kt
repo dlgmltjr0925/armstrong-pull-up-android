@@ -1,4 +1,4 @@
-package com.mazzeom.app.armstrong.sign_in
+package com.mazzeom.app.armstrong.root.sign_in
 
 import android.content.Context
 import android.util.AttributeSet
@@ -12,7 +12,8 @@ import io.reactivex.Observable
 /**
  * Top level view for {@link SignInBuilder.SignInScope}.
  */
-class SignInView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : LinearLayout(context, attrs, defStyle), SignInInteractor.SignInPresenter {
+class SignInView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : LinearLayout(context, attrs, defStyle),
+    SignInInteractor.SignInPresenter {
     private lateinit var profileGridView: GridView;
     private var profiles: Array<ProfileDTO> = arrayOf()
 

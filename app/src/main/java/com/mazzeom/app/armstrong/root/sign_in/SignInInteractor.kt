@@ -1,8 +1,7 @@
-package com.mazzeom.app.armstrong.sign_in
+package com.mazzeom.app.armstrong.root.sign_in
 
 import android.util.Log
 import com.mazzeom.app.armstrong.libs.api.Api
-import com.mazzeom.app.armstrong.libs.api.ApiService
 import com.mazzeom.app.armstrong.libs.api.response.GetProfileResponse
 import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
 import com.uber.rib.core.Bundle
@@ -12,8 +11,6 @@ import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 /**

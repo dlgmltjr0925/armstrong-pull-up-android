@@ -1,6 +1,8 @@
-package com.mazzeom.app.armstrong.main
+package com.mazzeom.app.armstrong.root.main
 
+import android.util.Log
 import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
+import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
@@ -20,8 +22,8 @@ class MainInteractor(profile: ProfileDTO) : Interactor<MainInteractor.MainPresen
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
-
-    presenter.setProfileNickname(profile.nickname)
+    
+    router.attachBottomNavigation()
   }
 
   override fun willResignActive() {
@@ -30,10 +32,14 @@ class MainInteractor(profile: ProfileDTO) : Interactor<MainInteractor.MainPresen
     // TODO: Perform any required clean up here, or delete this method entirely if not needed.
   }
 
+  inner class BottomNavigationListener: BottomNavigationInteractor.Listener {
+    override fun onClickNavigationItem(itemId: Int) {
+      Log.d("MainInteractor", "Bottom Navigation : ${itemId}")
+    }
+  }
+
   /**
    * Presenter interface implemented by this RIB's view.
    */
-  interface MainPresenter {
-    fun setProfileNickname(nickname: String)
-  }
+  interface MainPresenter
 }

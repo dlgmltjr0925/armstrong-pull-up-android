@@ -1,5 +1,9 @@
 package com.mazzeom.app.armstrong.sign_in
 
+import com.mazzeom.app.armstrong.root.sign_in.SignInBuilder
+import com.mazzeom.app.armstrong.root.sign_in.SignInInteractor
+import com.mazzeom.app.armstrong.root.sign_in.SignInRouter
+import com.mazzeom.app.armstrong.root.sign_in.SignInView
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.RouterHelper
 

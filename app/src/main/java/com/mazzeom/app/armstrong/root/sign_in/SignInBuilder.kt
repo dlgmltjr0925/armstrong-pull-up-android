@@ -1,8 +1,9 @@
-package com.mazzeom.app.armstrong.sign_in
+package com.mazzeom.app.armstrong.root.sign_in
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
+import com.mazzeom.app.armstrong.root.sign_in.DaggerSignInBuilder_Component
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -61,7 +62,8 @@ class SignInBuilder(dependency: ParentComponent) : ViewBuilder<SignInView, SignI
       internal fun router(
           component: Component,
           view: SignInView,
-          interactor: SignInInteractor): SignInRouter {
+          interactor: SignInInteractor
+      ): SignInRouter {
         return SignInRouter(view, interactor, component)
       }
     }

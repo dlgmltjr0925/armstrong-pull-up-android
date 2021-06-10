@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dailyNavigationItem"
+        android:title="@string/bottom_nav_daily_title"/>
+    <item
+        android:id="@+id/recordNavigationItem"
+        android:title="@string/bottom_nav_record_title"/>
+    <item
+        android:id="@+id/profileNavigationItem"
+        android:title="@string/bottom_nav_profile_title"/>
+</menu>

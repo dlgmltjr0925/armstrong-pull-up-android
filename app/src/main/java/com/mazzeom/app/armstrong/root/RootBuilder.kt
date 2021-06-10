@@ -3,9 +3,9 @@ package com.mazzeom.app.armstrong.root
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
-import com.mazzeom.app.armstrong.main.MainBuilder
-import com.mazzeom.app.armstrong.sign_in.SignInBuilder
-import com.mazzeom.app.armstrong.sign_in.SignInInteractor
+import com.mazzeom.app.armstrong.root.main.MainBuilder
+import com.mazzeom.app.armstrong.root.sign_in.SignInBuilder
+import com.mazzeom.app.armstrong.root.sign_in.SignInInteractor
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds

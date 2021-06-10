@@ -1,7 +1,5 @@
-package com.mazzeom.app.armstrong.main
+package com.mazzeom.app.armstrong.root.main.bottom_navigation
 
-import com.mazzeom.app.armstrong.root.main.MainInteractor
-import com.mazzeom.app.armstrong.root.main.MainRouter
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.InteractorHelper
 
@@ -10,18 +8,18 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class MainInteractorTest : RibTestBasePlaceholder() {
+class BottomNavigationInteractorTest : RibTestBasePlaceholder() {
 
-  @Mock internal lateinit var presenter: MainInteractor.MainPresenter
-  @Mock internal lateinit var router: MainRouter
+  @Mock internal lateinit var presenter: BottomNavigationInteractor.BottomNavigationPresenter
+  @Mock internal lateinit var router: BottomNavigationRouter
 
-  private var interactor: MainInteractor? = null
+  private var interactor: BottomNavigationInteractor? = null
 
   @Before
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    interactor = TestMainInteractor.create(presenter)
+    interactor = TestBottomNavigationInteractor.create(presenter)
   }
 
   /**
@@ -30,7 +28,7 @@ class MainInteractorTest : RibTestBasePlaceholder() {
   @Test
   fun anExampleTest_withSomeConditions_shouldPass() {
     // Use InteractorHelper to drive your interactor's lifecycle.
-    InteractorHelper.attach<MainInteractor.MainPresenter, MainRouter>(interactor!!, presenter, router, null)
+    InteractorHelper.attach<BottomNavigationInteractor.BottomNavigationPresenter, BottomNavigationRouter>(interactor!!, presenter, router, null)
     InteractorHelper.detach(interactor!!)
 
     throw RuntimeException("Remove this test and add real tests.")

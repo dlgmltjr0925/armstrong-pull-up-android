@@ -1,6 +1,4 @@
-package com.mazzeom.app.armstrong.sign_in
-
-import android.view.View
+package com.mazzeom.app.armstrong.root.sign_in
 
 import com.uber.rib.core.ViewRouter
 

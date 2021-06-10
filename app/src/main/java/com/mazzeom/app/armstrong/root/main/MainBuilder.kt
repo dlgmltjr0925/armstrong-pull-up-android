@@ -1,4 +1,4 @@
-package com.mazzeom.app.armstrong.main
+package com.mazzeom.app.armstrong.root.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,6 +13,8 @@ import javax.inject.Qualifier
 import javax.inject.Scope
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
+import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationBuilder
+import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationInteractor
 
 /**
  * Builder for the {@link MainScope}.
@@ -61,11 +63,19 @@ class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRoute
       @MainScope
       @Provides
       @JvmStatic
+      internal fun bottomNavigationListener(interactor: MainInteractor): BottomNavigationInteractor.Listener {
+        return interactor.BottomNavigationListener()
+      }
+
+      @MainScope
+      @Provides
+      @JvmStatic
       internal fun router(
-          component: Component,
-          view: MainView,
-          interactor: MainInteractor): MainRouter {
-        return MainRouter(view, interactor, component)
+        component: Component,
+        view: MainView,
+        interactor: MainInteractor
+      ): MainRouter {
+        return MainRouter(view, interactor, component, BottomNavigationBuilder(component))
       }
     }
 
@@ -74,7 +84,9 @@ class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRoute
 
   @MainScope
   @dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
-  interface Component : InteractorBaseComponent<MainInteractor>, BuilderComponent {
+  interface Component : InteractorBaseComponent<MainInteractor>,
+    BottomNavigationBuilder.ParentComponent,
+    BuilderComponent {
 
     @dagger.Component.Builder
     interface Builder {

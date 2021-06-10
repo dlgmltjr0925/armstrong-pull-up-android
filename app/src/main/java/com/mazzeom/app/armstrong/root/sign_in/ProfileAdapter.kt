@@ -1,10 +1,6 @@
-package com.mazzeom.app.armstrong.sign_in
+package com.mazzeom.app.armstrong.root.sign_in
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +8,6 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
-import io.reactivex.Observable
-import org.xmlpull.v1.XmlPullParser
 
 class ProfileAdapter(private var context: Context, private var profiles: Array<ProfileDTO>): BaseAdapter() {
     override fun getCount(): Int {

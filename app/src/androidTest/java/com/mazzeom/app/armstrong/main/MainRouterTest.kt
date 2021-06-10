@@ -1,5 +1,9 @@
 package com.mazzeom.app.armstrong.main
 
+import com.mazzeom.app.armstrong.root.main.MainBuilder
+import com.mazzeom.app.armstrong.root.main.MainInteractor
+import com.mazzeom.app.armstrong.root.main.MainRouter
+import com.mazzeom.app.armstrong.root.main.MainView
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.RouterHelper
 
@@ -20,7 +24,7 @@ class MainRouterTest : RibTestBasePlaceholder() {
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    router = MainRouter(view, interactor, component)
+    router = MainRouter(view, interactor, component, BottomNavigationBuilder(component))
   }
 
   /**
