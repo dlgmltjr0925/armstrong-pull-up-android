@@ -1,4 +1,4 @@
-package com.mazzeom.app.armstrong.root
+package com.mazzeom.app.armstrong.sign_in
 
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
@@ -6,20 +6,20 @@ import com.uber.rib.core.RibInteractor
 import javax.inject.Inject
 
 /**
- * Coordinates Business Logic for [RootScope].
+ * Coordinates Business Logic for [SignInScope].
  *
  * TODO describe the logic of this scope.
  */
 @RibInteractor
-class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>() {
+class SignInInteractor : Interactor<SignInInteractor.SignInPresenter, SignInRouter>() {
 
   @Inject
-  lateinit var presenter: RootPresenter
+  lateinit var presenter: SignInPresenter
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
 
-    router.attachSignIn()
+    // TODO: Add attachment logic here (RxSubscriptions, etc.).
   }
 
   override fun willResignActive() {
@@ -31,5 +31,5 @@ class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>() {
   /**
    * Presenter interface implemented by this RIB's view.
    */
-  interface RootPresenter
+  interface SignInPresenter
 }

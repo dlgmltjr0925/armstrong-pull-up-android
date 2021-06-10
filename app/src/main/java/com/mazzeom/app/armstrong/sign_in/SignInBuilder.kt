@@ -1,9 +1,8 @@
-package com.mazzeom.app.armstrong.root
+package com.mazzeom.app.armstrong.sign_in
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
-import com.mazzeom.app.armstrong.sign_in.SignInBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -15,31 +14,31 @@ import javax.inject.Qualifier
 import javax.inject.Scope
 
 /**
- * Builder for the {@link RootScope}.
+ * Builder for the {@link SignInScope}.
  *
  * TODO describe this scope's responsibility as a whole.
  */
-class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRouter, RootBuilder.ParentComponent>(dependency) {
+class SignInBuilder(dependency: ParentComponent) : ViewBuilder<SignInView, SignInRouter, SignInBuilder.ParentComponent>(dependency) {
 
   /**
-   * Builds a new [RootRouter].
+   * Builds a new [SignInRouter].
    *
    * @param parentViewGroup parent view group that this router's view will be added to.
-   * @return a new [RootRouter].
+   * @return a new [SignInRouter].
    */
-  fun build(parentViewGroup: ViewGroup): RootRouter {
+  fun build(parentViewGroup: ViewGroup): SignInRouter {
     val view = createView(parentViewGroup)
-    val interactor = RootInteractor()
-    val component = DaggerRootBuilder_Component.builder()
+    val interactor = SignInInteractor()
+    val component = DaggerSignInBuilder_Component.builder()
         .parentComponent(dependency)
         .view(view)
         .interactor(interactor)
         .build()
-    return component.rootRouter()
+    return component.signinRouter()
   }
 
-  override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): RootView {
-    return inflater.inflate(R.layout.root_rib, parentViewGroup, false) as RootView
+  override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): SignInView {
+    return inflater.inflate(R.layout.sign_in_rib, parentViewGroup, false) as SignInView
   }
 
   interface ParentComponent {
@@ -49,38 +48,38 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
   @dagger.Module
   abstract class Module {
 
-    @RootScope
+    @SignInScope
     @Binds
-    internal abstract fun presenter(view: RootView): RootInteractor.RootPresenter
+    internal abstract fun presenter(view: SignInView): SignInInteractor.SignInPresenter
 
     @dagger.Module
     companion object {
 
-      @RootScope
+      @SignInScope
       @Provides
       @JvmStatic
       internal fun router(
           component: Component,
-          view: RootView,
-          interactor: RootInteractor): RootRouter {
-        return RootRouter(view, interactor, component, SignInBuilder(component))
+          view: SignInView,
+          interactor: SignInInteractor): SignInRouter {
+        return SignInRouter(view, interactor, component)
       }
     }
 
     // TODO: Create provider methods for dependencies created by this Rib. These should be static.
   }
 
-  @RootScope
+  @SignInScope
   @dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
-  interface Component : InteractorBaseComponent<RootInteractor>, SignInBuilder.ParentComponent, BuilderComponent {
+  interface Component : InteractorBaseComponent<SignInInteractor>, BuilderComponent {
 
     @dagger.Component.Builder
     interface Builder {
       @BindsInstance
-      fun interactor(interactor: RootInteractor): Builder
+      fun interactor(interactor: SignInInteractor): Builder
 
       @BindsInstance
-      fun view(view: RootView): Builder
+      fun view(view: SignInView): Builder
 
       fun parentComponent(component: ParentComponent): Builder
       fun build(): Component
@@ -88,14 +87,14 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
   }
 
   interface BuilderComponent {
-    fun rootRouter(): RootRouter
+    fun signinRouter(): SignInRouter
   }
 
   @Scope
   @Retention(CLASS)
-  internal annotation class RootScope
+  internal annotation class SignInScope
 
   @Qualifier
   @Retention(CLASS)
-  internal annotation class RootInternal
+  internal annotation class SignInInternal
 }

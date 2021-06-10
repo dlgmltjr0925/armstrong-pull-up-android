@@ -1,4 +1,4 @@
-package com.mazzeom.app.armstrong.root
+package com.mazzeom.app.armstrong.sign_in
 
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.RouterHelper
@@ -8,19 +8,19 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class RootRouterTest : RibTestBasePlaceholder() {
+class SignInRouterTest : RibTestBasePlaceholder() {
 
-  @Mock internal lateinit var component: RootBuilder.Component
-  @Mock internal lateinit var interactor: RootInteractor
-  @Mock internal lateinit var view: RootView
+  @Mock internal lateinit var component: SignInBuilder.Component
+  @Mock internal lateinit var interactor: SignInInteractor
+  @Mock internal lateinit var view: SignInView
 
-  private var router: RootRouter? = null
+  private var router: SignInRouter? = null
 
   @Before
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    router = RootRouter(view, interactor, component, SignInBuilder(component))
+    router = SignInRouter(view, interactor, component)
   }
 
   /**

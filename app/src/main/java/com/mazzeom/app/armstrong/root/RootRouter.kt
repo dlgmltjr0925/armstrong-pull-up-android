@@ -1,6 +1,7 @@
 package com.mazzeom.app.armstrong.root
 
-import android.view.View
+import com.mazzeom.app.armstrong.sign_in.SignInBuilder
+import com.mazzeom.app.armstrong.sign_in.SignInRouter
 
 import com.uber.rib.core.ViewRouter
 
@@ -12,4 +13,22 @@ import com.uber.rib.core.ViewRouter
 class RootRouter(
     view: RootView,
     interactor: RootInteractor,
-    component: RootBuilder.Component) : ViewRouter<RootView, RootInteractor>(view, interactor, component)
+    component: RootBuilder.Component,
+    signInBuilder: SignInBuilder
+) : ViewRouter<RootView, RootInteractor>(view, interactor, component) {
+    val signInBuilder: SignInBuilder = signInBuilder
+    var signInRouter: SignInRouter? = null
+
+    fun attachSignIn() {
+        signInRouter = signInBuilder.build(view)
+        attachChild(signInRouter!!)
+        view.addView(signInRouter!!.view)
+    }
+
+    fun detachSignIn() {
+        if (signInRouter != null) {
+            detachChild(signInRouter!!)
+            view.removeView(signInRouter!!.view)
+        }
+    }
+}
