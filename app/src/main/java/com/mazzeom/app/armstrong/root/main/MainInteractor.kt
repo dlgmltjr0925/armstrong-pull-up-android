@@ -16,6 +16,7 @@ import javax.inject.Inject
 @RibInteractor
 class MainInteractor(profile: ProfileDTO) : Interactor<MainInteractor.MainPresenter, MainRouter>() {
   var profile = profile
+  var currentTabId: Int = 0
 
   @Inject
   lateinit var presenter: MainPresenter
@@ -24,6 +25,7 @@ class MainInteractor(profile: ProfileDTO) : Interactor<MainInteractor.MainPresen
     super.didBecomeActive(savedInstanceState)
     
     router.attachBottomNavigation()
+    router.attachDailyTab()
   }
 
   override fun willResignActive() {
@@ -33,8 +35,11 @@ class MainInteractor(profile: ProfileDTO) : Interactor<MainInteractor.MainPresen
   }
 
   inner class BottomNavigationListener: BottomNavigationInteractor.Listener {
-    override fun onClickNavigationItem(itemId: Int) {
-      Log.d("MainInteractor", "Bottom Navigation : ${itemId}")
+    override fun onClickNavigationItem(tabId: Int) {
+      if (currentTabId != tabId) {
+        router.replaceNavigationTab(currentTabId, tabId)
+        currentTabId = tabId
+      }
     }
   }
 

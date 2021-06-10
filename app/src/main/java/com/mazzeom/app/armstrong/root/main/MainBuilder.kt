@@ -15,6 +15,9 @@ import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
 import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationBuilder
 import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationInteractor
+import com.mazzeom.app.armstrong.root.main.daily_tab.DailyTabBuilder
+import com.mazzeom.app.armstrong.root.main.profile_tab.ProfileTabBuilder
+import com.mazzeom.app.armstrong.root.main.record_tab.RecordTabBuilder
 
 /**
  * Builder for the {@link MainScope}.
@@ -75,7 +78,7 @@ class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRoute
         view: MainView,
         interactor: MainInteractor
       ): MainRouter {
-        return MainRouter(view, interactor, component, BottomNavigationBuilder(component))
+        return MainRouter(view, interactor, component, BottomNavigationBuilder(component), DailyTabBuilder(component), RecordTabBuilder(component), ProfileTabBuilder(component))
       }
     }
 
@@ -86,6 +89,9 @@ class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRoute
   @dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
   interface Component : InteractorBaseComponent<MainInteractor>,
     BottomNavigationBuilder.ParentComponent,
+    DailyTabBuilder.ParentComponent,
+    RecordTabBuilder.ParentComponent,
+    ProfileTabBuilder.ParentComponent,
     BuilderComponent {
 
     @dagger.Component.Builder

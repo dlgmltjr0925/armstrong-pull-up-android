@@ -41,6 +41,6 @@ class BottomNavigationInteractor : Interactor<BottomNavigationInteractor.BottomN
   }
 
   interface Listener {
-      fun onClickNavigationItem(itemId: Int)
+      fun onClickNavigationItem(tabId: Int)
   }
 }

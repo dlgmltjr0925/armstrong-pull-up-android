@@ -24,7 +24,15 @@ class MainRouterTest : RibTestBasePlaceholder() {
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    router = MainRouter(view, interactor, component, BottomNavigationBuilder(component))
+    router = MainRouter(
+        view,
+        interactor,
+        component,
+        BottomNavigationBuilder(component),
+        DailyTabBuilder(component),
+        RecordTabBuilder(component),
+        ProfileTabBuilder(component)
+    )
   }
 
   /**
