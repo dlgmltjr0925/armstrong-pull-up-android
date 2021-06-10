@@ -6,6 +6,6 @@
     app:menu="@menu/bottom_nav_menu"
     app:itemTextColor="@color/white"
     app:itemIconTint="@color/white"
-    app:itemRippleColor="#333">
+    app:itemRippleColor="#fff">
 
 </com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationView>
