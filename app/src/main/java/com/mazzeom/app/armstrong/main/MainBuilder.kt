@@ -1,8 +1,7 @@
-package com.mazzeom.app.armstrong.sign_in
+package com.mazzeom.app.armstrong.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.mazzeom.app.armstrong.R
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -12,74 +11,78 @@ import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy.CLASS
 import javax.inject.Qualifier
 import javax.inject.Scope
+import com.mazzeom.app.armstrong.R
+import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
 
 /**
- * Builder for the {@link SignInScope}.
+ * Builder for the {@link MainScope}.
  *
  * TODO describe this scope's responsibility as a whole.
  */
-class SignInBuilder(dependency: ParentComponent) : ViewBuilder<SignInView, SignInRouter, SignInBuilder.ParentComponent>(dependency) {
+class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRouter, MainBuilder.ParentComponent>(dependency) {
+  var profile: ProfileDTO? = null
 
   /**
-   * Builds a new [SignInRouter].
+   * Builds a new [MainRouter].
    *
    * @param parentViewGroup parent view group that this router's view will be added to.
-   * @return a new [SignInRouter].
+   * @return a new [MainRouter].
    */
-  fun build(parentViewGroup: ViewGroup): SignInRouter {
+  fun build(parentViewGroup: ViewGroup, profile: ProfileDTO): MainRouter {
+    this.profile = profile
     val view = createView(parentViewGroup)
-    val interactor = SignInInteractor()
-    val component = DaggerSignInBuilder_Component.builder()
+    val interactor = MainInteractor(profile)
+    val component = DaggerMainBuilder_Component.builder()
         .parentComponent(dependency)
         .view(view)
         .interactor(interactor)
         .build()
-    return component.signinRouter()
+    return component.mainRouter()
   }
 
-  override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): SignInView {
-    return inflater.inflate(R.layout.sign_in_rib, parentViewGroup, false) as SignInView
+  override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): MainView {
+    return inflater.inflate(R.layout.main_rib, parentViewGroup, false) as MainView
   }
 
   interface ParentComponent {
-    fun listener(): SignInInteractor.Listener
+    // TODO: Define dependencies required from your parent interactor here.
   }
 
   @dagger.Module
   abstract class Module {
 
-    @SignInScope
+    @MainScope
     @Binds
-    internal abstract fun presenter(view: SignInView): SignInInteractor.SignInPresenter
+    internal abstract fun presenter(view: MainView): MainInteractor.MainPresenter
 
     @dagger.Module
     companion object {
 
-      @SignInScope
+      @MainScope
       @Provides
       @JvmStatic
       internal fun router(
           component: Component,
-          view: SignInView,
-          interactor: SignInInteractor): SignInRouter {
-        return SignInRouter(view, interactor, component)
+          view: MainView,
+          interactor: MainInteractor): MainRouter {
+        return MainRouter(view, interactor, component)
       }
     }
 
     // TODO: Create provider methods for dependencies created by this Rib. These should be static.
   }
 
-  @SignInScope
+  @MainScope
   @dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
-  interface Component : InteractorBaseComponent<SignInInteractor>, BuilderComponent {
+  interface Component : InteractorBaseComponent<MainInteractor>, BuilderComponent {
 
     @dagger.Component.Builder
     interface Builder {
       @BindsInstance
-      fun interactor(interactor: SignInInteractor): Builder
+      fun interactor(interactor: MainInteractor): Builder
 
       @BindsInstance
-      fun view(view: SignInView): Builder
+      fun view(view: MainView): Builder
 
       fun parentComponent(component: ParentComponent): Builder
       fun build(): Component
@@ -87,14 +90,14 @@ class SignInBuilder(dependency: ParentComponent) : ViewBuilder<SignInView, SignI
   }
 
   interface BuilderComponent {
-    fun signinRouter(): SignInRouter
+    fun mainRouter(): MainRouter
   }
 
   @Scope
   @Retention(CLASS)
-  internal annotation class SignInScope
+  internal annotation class MainScope
 
   @Qualifier
   @Retention(CLASS)
-  internal annotation class SignInInternal
+  internal annotation class MainInternal
 }

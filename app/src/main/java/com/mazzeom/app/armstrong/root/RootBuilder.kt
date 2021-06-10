@@ -3,7 +3,9 @@ package com.mazzeom.app.armstrong.root
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
+import com.mazzeom.app.armstrong.main.MainBuilder
 import com.mazzeom.app.armstrong.sign_in.SignInBuilder
+import com.mazzeom.app.armstrong.sign_in.SignInInteractor
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -59,11 +61,18 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
       @RootScope
       @Provides
       @JvmStatic
+      internal fun signInListener(interactor: RootInteractor): SignInInteractor.Listener {
+        return interactor.SignInListener()
+      }
+
+      @RootScope
+      @Provides
+      @JvmStatic
       internal fun router(
           component: Component,
           view: RootView,
           interactor: RootInteractor): RootRouter {
-        return RootRouter(view, interactor, component, SignInBuilder(component))
+        return RootRouter(view, interactor, component, SignInBuilder(component), MainBuilder(component))
       }
     }
 
@@ -72,7 +81,10 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
 
   @RootScope
   @dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
-  interface Component : InteractorBaseComponent<RootInteractor>, SignInBuilder.ParentComponent, BuilderComponent {
+  interface Component : InteractorBaseComponent<RootInteractor>,
+    SignInBuilder.ParentComponent,
+    MainBuilder.ParentComponent,
+    BuilderComponent {
 
     @dagger.Component.Builder
     interface Builder {

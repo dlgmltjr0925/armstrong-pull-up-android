@@ -1,8 +1,19 @@
 package com.mazzeom.app.armstrong.sign_in
 
+import android.util.Log
+import com.mazzeom.app.armstrong.libs.api.Api
+import com.mazzeom.app.armstrong.libs.api.ApiService
+import com.mazzeom.app.armstrong.libs.api.response.GetProfileResponse
+import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
+import io.reactivex.Observable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 /**
@@ -13,13 +24,19 @@ import javax.inject.Inject
 @RibInteractor
 class SignInInteractor : Interactor<SignInInteractor.SignInPresenter, SignInRouter>() {
 
-  @Inject
-  lateinit var presenter: SignInPresenter
+  @Inject lateinit var listener: Listener
+  @Inject lateinit var presenter: SignInPresenter
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
 
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
+    GetProfiles().start()
+
+    presenter
+      .onClickProfile()
+      .subscribe { profile ->
+        listener.login(profile)
+      }
   }
 
   override fun willResignActive() {
@@ -31,5 +48,31 @@ class SignInInteractor : Interactor<SignInInteractor.SignInPresenter, SignInRout
   /**
    * Presenter interface implemented by this RIB's view.
    */
-  interface SignInPresenter
+  interface SignInPresenter {
+    fun setProfiles(profiles: Array<ProfileDTO>)
+    fun onClickProfile(): Observable<ProfileDTO>
+  }
+
+  interface Listener {
+    fun login(profile: ProfileDTO)
+  }
+
+  inner class GetProfiles: Thread() {
+    override fun run() {
+      val service = Api.create()
+      service.getProfileRequest().enqueue(object : Callback<GetProfileResponse> {
+        override fun onResponse(
+          call: Call<GetProfileResponse>,
+          response: Response<GetProfileResponse>
+        ) {
+          val profiles = response.body()?.profiles
+          presenter.setProfiles(profiles!!)
+        }
+
+        override fun onFailure(call: Call<GetProfileResponse>, t: Throwable) {
+          Log.d("SignInInteractor", t.toString())
+        }
+      })
+    }
+  }
 }
