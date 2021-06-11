@@ -1,7 +1,6 @@
 package com.mazzeom.app.armstrong.root.main
 
-import android.util.Log
-import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
+import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor

@@ -1,6 +1,6 @@
 package com.mazzeom.app.armstrong.root
 
-import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
+import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.mazzeom.app.armstrong.root.sign_in.SignInInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor

@@ -13,6 +13,7 @@ import dagger.BindsInstance
 import dagger.Provides
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy.CLASS
+import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Scope
 
@@ -95,6 +96,7 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
       fun view(view: RootView): Builder
 
       fun parentComponent(component: ParentComponent): Builder
+
       fun build(): Component
     }
   }

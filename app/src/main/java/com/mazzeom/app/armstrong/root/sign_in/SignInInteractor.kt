@@ -3,7 +3,7 @@ package com.mazzeom.app.armstrong.root.sign_in
 import android.util.Log
 import com.mazzeom.app.armstrong.libs.api.Api
 import com.mazzeom.app.armstrong.libs.api.response.GetProfileResponse
-import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
+import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor

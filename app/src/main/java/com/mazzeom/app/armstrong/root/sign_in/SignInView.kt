@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.widget.GridView
 import android.widget.LinearLayout
 import com.mazzeom.app.armstrong.R
-import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
+import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.uber.rib.core.Initializer
 import io.reactivex.Observable
 

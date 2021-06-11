@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy.CLASS
 import javax.inject.Qualifier
 import javax.inject.Scope
 import com.mazzeom.app.armstrong.R
-import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
+import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationBuilder
 import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationInteractor
 import com.mazzeom.app.armstrong.root.main.daily_tab.DailyTabBuilder
@@ -34,12 +34,12 @@ class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRoute
    * @return a new [MainRouter].
    */
   fun build(parentViewGroup: ViewGroup, profile: ProfileDTO): MainRouter {
-    this.profile = profile
     val view = createView(parentViewGroup)
     val interactor = MainInteractor(profile)
     val component = DaggerMainBuilder_Component.builder()
         .parentComponent(dependency)
         .view(view)
+        .profile(profile)
         .interactor(interactor)
         .build()
     return component.mainRouter()
@@ -103,7 +103,11 @@ class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRoute
       fun view(view: MainView): Builder
 
       fun parentComponent(component: ParentComponent): Builder
+
       fun build(): Component
+
+      @BindsInstance
+      fun profile(profile: ProfileDTO): Builder
     }
   }
 

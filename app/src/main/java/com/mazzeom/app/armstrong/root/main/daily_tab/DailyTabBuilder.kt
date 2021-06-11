@@ -3,6 +3,7 @@ package com.mazzeom.app.armstrong.root.main.daily_tab
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
+import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -42,7 +43,7 @@ class DailyTabBuilder(dependency: ParentComponent) : ViewBuilder<DailyTabView, D
   }
 
   interface ParentComponent {
-    // TODO: Define dependencies required from your parent interactor here.
+    var profile: ProfileDTO
   }
 
   @dagger.Module

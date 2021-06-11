@@ -1,4 +1,4 @@
-package com.mazzeom.app.armstrong.libs.api.response
+package com.mazzeom.app.armstrong.libs.api.dto
 
 data class ProfileDTO (
     var id: Int,

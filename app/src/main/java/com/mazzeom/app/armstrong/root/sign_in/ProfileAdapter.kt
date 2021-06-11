@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.mazzeom.app.armstrong.R
-import com.mazzeom.app.armstrong.libs.api.response.ProfileDTO
+import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 
 class ProfileAdapter(private var context: Context, private var profiles: Array<ProfileDTO>): BaseAdapter() {
     override fun getCount(): Int {

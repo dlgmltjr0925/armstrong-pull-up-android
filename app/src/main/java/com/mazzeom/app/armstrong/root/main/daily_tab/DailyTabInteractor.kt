@@ -1,8 +1,10 @@
 package com.mazzeom.app.armstrong.root.main.daily_tab
 
+import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -13,13 +15,14 @@ import javax.inject.Inject
 @RibInteractor
 class DailyTabInteractor : Interactor<DailyTabInteractor.DailyTabPresenter, DailyTabRouter>() {
 
-  @Inject
-  lateinit var presenter: DailyTabPresenter
+  @Inject lateinit var presenter: DailyTabPresenter
+  @Inject lateinit var profile: ProfileDTO
+  var currentDate = Date()
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
 
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
+
   }
 
   override fun willResignActive() {
