@@ -2,14 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/dailyNavigationItem"
-        android:icon="@drawable/ic_daily_tab_inactive"
-        android:title="@string/bottom_nav_daily_title"/>
+        android:checkable="false"
+        android:icon="@drawable/ic_daily_tab"
+        android:title="@string/bottom_nav_daily_title" />
     <item
         android:id="@+id/recordNavigationItem"
-        android:icon="@drawable/ic_record_tab_inactive"
+        android:icon="@drawable/ic_record_tab"
         android:title="@string/bottom_nav_record_title"/>
     <item
         android:id="@+id/profileNavigationItem"
-        android:icon="@drawable/ic_profile_tab_inactive"
+        android:icon="@drawable/ic_profile_tab"
         android:title="@string/bottom_nav_profile_title"/>
 </menu>
