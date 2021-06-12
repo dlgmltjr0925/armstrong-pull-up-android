@@ -1,9 +1,6 @@
 package com.mazzeom.app.armstrong.libs.api
 
-import com.mazzeom.app.armstrong.libs.api.request.DeleteProfileRequestBody
-import com.mazzeom.app.armstrong.libs.api.request.PostProfileRequestBody
-import com.mazzeom.app.armstrong.libs.api.request.PostRecordByProfileIdRequestBody
-import com.mazzeom.app.armstrong.libs.api.request.PutRecordByProfileIdRequestBody
+import com.mazzeom.app.armstrong.libs.api.request.*
 import com.mazzeom.app.armstrong.libs.api.response.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -16,6 +13,11 @@ interface ApiService {
     fun postProfileRequest(
         @Body parameters: PostProfileRequestBody
     ): Call<PostProfileResponse>
+
+    @PUT("profile")
+    fun putProfileRequest(
+        @Body parameters: PutProfileRequestBody
+    ): Call<PutProfileResponse>
 
     @DELETE("profile")
     fun deleteProfileRequest(
