@@ -32,8 +32,8 @@ class ProfileTabView @JvmOverloads constructor(context: Context, attrs: Attribut
             val nickname = text.toString()
             profileImageText.text = when(nickname.length) {
                 0 -> ""
-                2 -> nickname.slice(0..1).uppercase()
-                else -> nickname[0].toString().uppercase()
+                2 -> nickname.slice(0..1).toUpperCase()
+                else -> nickname[0].toString().toUpperCase()
             }
         }
     }

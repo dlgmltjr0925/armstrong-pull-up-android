@@ -1,5 +1,6 @@
 package com.mazzeom.app.armstrong.root.main.bottom_navigation
 
+import android.annotation.SuppressLint
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor

@@ -44,8 +44,8 @@ class ProfileAdapter(private var context: Context, private var profiles: Array<P
         profileNickName.text = item.nickname
         profileImageText.text = when(item.nickname.length) {
             0 -> "+"
-            2 -> item.nickname.slice(0..1).uppercase()
-            else -> item.nickname[0].toString().uppercase()
+            2 -> item.nickname.slice(0..1).toUpperCase()
+            else -> item.nickname[0].toString().toUpperCase()
         }
 
         return view
