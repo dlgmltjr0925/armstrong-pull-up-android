@@ -42,7 +42,7 @@ class BottomNavigationBuilder(dependency: ParentComponent) : ViewBuilder<BottomN
   }
 
   interface ParentComponent {
-    fun listener(): BottomNavigationInteractor.Listener
+    fun bottomNavigationlistener(): BottomNavigationInteractor.Listener
   }
 
   @dagger.Module

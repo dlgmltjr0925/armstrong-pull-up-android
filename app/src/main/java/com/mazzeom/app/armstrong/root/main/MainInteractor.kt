@@ -1,10 +1,14 @@
 package com.mazzeom.app.armstrong.root.main
 
+import android.util.Log
+import com.jakewharton.rxrelay3.BehaviorRelay
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationInteractor
+import com.mazzeom.app.armstrong.root.main.profile_tab.ProfileTabInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -14,8 +18,9 @@ import javax.inject.Inject
  */
 @RibInteractor
 class MainInteractor(profile: ProfileDTO) : Interactor<MainInteractor.MainPresenter, MainRouter>() {
-  var profile = profile
+  var relay: BehaviorRelay<ProfileDTO> = BehaviorRelay.createDefault(profile)
   var currentTabId: Int = 0
+
 
   @Inject lateinit var presenter: MainPresenter
 
@@ -32,12 +37,26 @@ class MainInteractor(profile: ProfileDTO) : Interactor<MainInteractor.MainPresen
     // TODO: Perform any required clean up here, or delete this method entirely if not needed.
   }
 
+  fun onChangeProfile(): Observable<ProfileDTO> {
+    return Observable.create { emitter ->
+      relay.subscribe {
+        emitter.onNext(it)
+      }
+    }
+  }
+
   inner class BottomNavigationListener: BottomNavigationInteractor.Listener {
     override fun onClickNavigationItem(tabId: Int) {
       if (currentTabId != tabId) {
         router.replaceNavigationTab(currentTabId, tabId)
         currentTabId = tabId
       }
+    }
+  }
+
+  inner class ProfileTabListener: ProfileTabInteractor.Listener {
+    override fun onUpateProfile(profile: ProfileDTO) {
+      relay.accept(profile)
     }
   }
 

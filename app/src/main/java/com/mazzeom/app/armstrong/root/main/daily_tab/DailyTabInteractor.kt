@@ -4,6 +4,7 @@ import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
+import io.reactivex.Observable
 import java.util.*
 import javax.inject.Inject
 
@@ -16,13 +17,17 @@ import javax.inject.Inject
 class DailyTabInteractor : Interactor<DailyTabInteractor.DailyTabPresenter, DailyTabRouter>() {
 
   @Inject lateinit var presenter: DailyTabPresenter
-  @Inject lateinit var profile: ProfileDTO
+  @Inject lateinit var onChangeProfile: Observable<ProfileDTO>
+
+  lateinit var profile: ProfileDTO
   var currentDate = Date()
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
 
-
+    onChangeProfile.subscribe { profile ->
+      this.profile = profile
+    }
   }
 
   override fun willResignActive() {

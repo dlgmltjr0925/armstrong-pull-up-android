@@ -25,18 +25,23 @@ import javax.inject.Inject
 class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter, ProfileTabRouter>() {
 
   @Inject lateinit var presenter: ProfileTabPresenter
-  @Inject lateinit var profile: ProfileDTO
+  @Inject lateinit var onChangeProfile: Observable<ProfileDTO>
+  @Inject lateinit var profileTabListener: Listener
+
+  lateinit var profile: ProfileDTO
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
 
-    presenter.setInitialNickname(profile.nickname)
+    onChangeProfile.subscribe {
+      this.profile = it
+      presenter.setNickname(it.nickname)
+    }
 
     presenter.onClickSave().subscribe { nickname ->
-      if (profile.nickname != nickname) {
-        var profile = ProfileDTO(this.profile.id, this.profile.nickname)
-        UpdateProfile(profile).start()
-      }
+      Log.d("UpdateProfile", nickname)
+      val profile = ProfileDTO(this.profile.id, nickname)
+      UpdateProfile(profile).start()
     }
   }
 
@@ -46,17 +51,23 @@ class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter
     // TODO: Perform any required clean up here, or delete this method entirely if not needed.
   }
 
+  interface Listener {
+    fun onUpateProfile(profile: ProfileDTO)
+  }
+
   /**
    * Presenter interface implemented by this RIB's view.
    */
   interface ProfileTabPresenter {
-    fun setInitialNickname(nickname: String)
+    fun setNickname(nickname: String)
     fun onClickSave(): Observable<String>
   }
 
 
   inner class UpdateProfile(profile: ProfileDTO): Thread() {
+    val profile = profile
     override fun run() {
+      Log.d("UpdateProfile", "run")
       val service = Api.create()
       service
         .putProfileRequest(PutProfileRequestBody(profile.id, profile.nickname))
@@ -65,7 +76,11 @@ class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter
             call: Call<PutProfileResponse>,
             response: Response<PutProfileResponse>
           ) {
-            Log.d("UpdateProfile", response?.body()?.profile.toString())
+            Log.d("UpdateProfile", response?.toString())
+            var profile = response?.body()?.profile
+            profile?.let {
+              profileTabListener.onUpateProfile(profile)
+            }
           }
 
           override fun onFailure(call: Call<PutProfileResponse>, t: Throwable) {
@@ -74,4 +89,5 @@ class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter
         })
     }
   }
+
 }

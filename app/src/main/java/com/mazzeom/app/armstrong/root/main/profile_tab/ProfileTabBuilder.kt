@@ -9,6 +9,7 @@ import com.uber.rib.core.ViewBuilder
 import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
+import io.reactivex.Observable
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy.CLASS
 import javax.inject.Qualifier
@@ -43,7 +44,8 @@ class ProfileTabBuilder(dependency: ParentComponent) : ViewBuilder<ProfileTabVie
   }
 
   interface ParentComponent {
-    var profile: ProfileDTO
+    fun onChangeProfile(): Observable<ProfileDTO>
+    fun profileTablistener(): ProfileTabInteractor.Listener
   }
 
   @dagger.Module

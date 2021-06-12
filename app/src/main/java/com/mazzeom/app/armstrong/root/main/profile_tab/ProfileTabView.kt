@@ -38,7 +38,7 @@ class ProfileTabView @JvmOverloads constructor(context: Context, attrs: Attribut
         }
     }
 
-    override fun setInitialNickname(nickname: String) {
+    override fun setNickname(nickname: String) {
         profileNickNameEditText.setText(nickname)
     }
 

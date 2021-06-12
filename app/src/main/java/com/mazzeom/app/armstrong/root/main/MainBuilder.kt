@@ -17,7 +17,9 @@ import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationBui
 import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationInteractor
 import com.mazzeom.app.armstrong.root.main.daily_tab.DailyTabBuilder
 import com.mazzeom.app.armstrong.root.main.profile_tab.ProfileTabBuilder
+import com.mazzeom.app.armstrong.root.main.profile_tab.ProfileTabInteractor
 import com.mazzeom.app.armstrong.root.main.record_tab.RecordTabBuilder
+import io.reactivex.Observable
 
 /**
  * Builder for the {@link MainScope}.
@@ -25,7 +27,6 @@ import com.mazzeom.app.armstrong.root.main.record_tab.RecordTabBuilder
  * TODO describe this scope's responsibility as a whole.
  */
 class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRouter, MainBuilder.ParentComponent>(dependency) {
-  var profile: ProfileDTO? = null
 
   /**
    * Builds a new [MainRouter].
@@ -73,6 +74,20 @@ class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRoute
       @MainScope
       @Provides
       @JvmStatic
+      internal fun profileTabListener(interactor: MainInteractor): ProfileTabInteractor.Listener {
+        return interactor.ProfileTabListener()
+      }
+
+      @MainScope
+      @Provides
+      @JvmStatic
+      internal fun onChangeProfile(interactor: MainInteractor): Observable<ProfileDTO> {
+        return interactor.onChangeProfile()
+      }
+
+      @MainScope
+      @Provides
+      @JvmStatic
       internal fun router(
         component: Component,
         view: MainView,
@@ -102,12 +117,12 @@ class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRoute
       @BindsInstance
       fun view(view: MainView): Builder
 
+      @BindsInstance
+      fun profile(profile: ProfileDTO): Builder
+
       fun parentComponent(component: ParentComponent): Builder
 
       fun build(): Component
-
-      @BindsInstance
-      fun profile(profile: ProfileDTO): Builder
     }
   }
 

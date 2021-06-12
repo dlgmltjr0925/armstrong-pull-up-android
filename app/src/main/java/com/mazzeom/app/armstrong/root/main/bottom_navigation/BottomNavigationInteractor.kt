@@ -14,7 +14,7 @@ import javax.inject.Inject
 @RibInteractor
 class BottomNavigationInteractor : Interactor<BottomNavigationInteractor.BottomNavigationPresenter, BottomNavigationRouter>() {
 
-  @Inject lateinit var listener: Listener
+  @Inject lateinit var bottomNavigationListener: Listener
   @Inject lateinit var presenter: BottomNavigationPresenter
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class BottomNavigationInteractor : Interactor<BottomNavigationInteractor.BottomN
     presenter
       .onClickNavigationItem()
       .subscribe {
-        listener.onClickNavigationItem(it)
+        bottomNavigationListener.onClickNavigationItem(it)
       }
   }
 
