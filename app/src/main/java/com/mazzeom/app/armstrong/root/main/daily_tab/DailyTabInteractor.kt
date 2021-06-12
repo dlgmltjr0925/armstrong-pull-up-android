@@ -1,5 +1,6 @@
 package com.mazzeom.app.armstrong.root.main.daily_tab
 
+import android.annotation.SuppressLint
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor

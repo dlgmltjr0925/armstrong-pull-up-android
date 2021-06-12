@@ -1,5 +1,6 @@
 package com.mazzeom.app.armstrong.root.main.profile_tab
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.mazzeom.app.armstrong.libs.api.Api
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
@@ -7,6 +8,7 @@ import com.mazzeom.app.armstrong.libs.api.request.PutProfileRequestBody
 import com.mazzeom.app.armstrong.libs.api.response.GetProfileResponse
 import com.mazzeom.app.armstrong.libs.api.response.PutProfileResponse
 import com.uber.rib.core.Bundle
+import com.uber.rib.core.Initializer
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
 import io.reactivex.Observable
@@ -30,6 +32,8 @@ class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter
 
   lateinit var profile: ProfileDTO
 
+  @Initializer
+  @SuppressLint("MissingSuperCall")
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
 
