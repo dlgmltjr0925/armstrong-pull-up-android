@@ -17,8 +17,7 @@ class MainInteractor(profile: ProfileDTO) : Interactor<MainInteractor.MainPresen
   var profile = profile
   var currentTabId: Int = 0
 
-  @Inject
-  lateinit var presenter: MainPresenter
+  @Inject lateinit var presenter: MainPresenter
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
