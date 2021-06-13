@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mazzeom.app.armstrong.root.main.daily_tab.push_up.PushUpView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal">
+
+	<include
+		android:id="@+id/pushUpCountItem1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		layout="@layout/count_item" />
+
+	<include
+		android:id="@+id/pushUpCountItem2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		layout="@layout/count_item" />
+
+	<include
+		android:id="@+id/pushUpCountItem3"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		layout="@layout/count_item" />
+
+
+</com.mazzeom.app.armstrong.root.main.daily_tab.push_up.PushUpView>

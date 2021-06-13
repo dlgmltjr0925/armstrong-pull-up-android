@@ -67,7 +67,6 @@ class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter
     fun onClickSave(): Observable<String>
   }
 
-
   inner class UpdateProfile(profile: ProfileDTO): Thread() {
     val profile = profile
     override fun run() {

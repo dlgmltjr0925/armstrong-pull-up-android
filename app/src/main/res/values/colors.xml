@@ -11,4 +11,5 @@
   <color name="bottom_nav_check">@color/white</color>
   <color name="edit_text_background">#232222</color>
   <color name="edit_text_hint_color">#737473</color>
+  <color name="button_pressed_background">#11ffffff</color>
 </resources>

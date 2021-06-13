@@ -12,4 +12,7 @@ import com.uber.rib.core.ViewRouter
 class DailyTabRouter(
     view: DailyTabView,
     interactor: DailyTabInteractor,
-    component: DailyTabBuilder.Component) : ViewRouter<DailyTabView, DailyTabInteractor>(view, interactor, component)
+    component: DailyTabBuilder.Component
+) : ViewRouter<DailyTabView, DailyTabInteractor>(view, interactor, component) {
+
+}

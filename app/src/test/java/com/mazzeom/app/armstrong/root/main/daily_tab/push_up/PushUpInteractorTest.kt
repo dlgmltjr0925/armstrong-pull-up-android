@@ -1,7 +1,5 @@
-package com.mazzeom.app.armstrong.sign_in
+package com.mazzeom.app.armstrong.root.main.daily_tab.push_up
 
-import com.mazzeom.app.armstrong.root.sign_in.SignInInteractor
-import com.mazzeom.app.armstrong.root.sign_in.SignInRouter
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.InteractorHelper
 
@@ -10,18 +8,18 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class SignInInteractorTest : RibTestBasePlaceholder() {
+class PushUpInteractorTest : RibTestBasePlaceholder() {
 
-  @Mock internal lateinit var presenter: SignInInteractor.SignInPresenter
-  @Mock internal lateinit var router: SignInRouter
+  @Mock internal lateinit var presenter: PushUpInteractor.PushUpPresenter
+  @Mock internal lateinit var router: PushUpRouter
 
-  private var interactor: SignInInteractor? = null
+  private var interactor: PushUpInteractor? = null
 
   @Before
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    interactor = TestSignInInteractor.create(presenter)
+    interactor = TestPushUpInteractor.create(presenter)
   }
 
   /**
@@ -30,7 +28,7 @@ class SignInInteractorTest : RibTestBasePlaceholder() {
   @Test
   fun anExampleTest_withSomeConditions_shouldPass() {
     // Use InteractorHelper to drive your interactor's lifecycle.
-    InteractorHelper.attach<SignInInteractor.SignInPresenter, SignInRouter>(interactor!!, presenter, router, null)
+    InteractorHelper.attach<PushUpInteractor.PushUpPresenter, PushUpRouter>(interactor!!, presenter, router, null)
     InteractorHelper.detach(interactor!!)
 
     throw RuntimeException("Remove this test and add real tests.")
