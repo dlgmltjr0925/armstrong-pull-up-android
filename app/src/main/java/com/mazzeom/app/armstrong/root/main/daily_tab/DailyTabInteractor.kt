@@ -58,9 +58,35 @@ class DailyTabInteractor : Interactor<DailyTabInteractor.DailyTabPresenter, Dail
     // TODO: Perform any required clean up here, or delete this method entirely if not needed.
   }
 
+  fun detachRouter(dayOfWeek: Int) {
+    when(dayOfWeek) {
+      2 -> {}
+      3 -> {}
+      4 -> {}
+      5 -> {}
+      6 -> {}
+      else -> router.detachWeekend()
+    }
+  }
+
+  fun attachRouter(dayOfWeek: Int) {
+    when(dayOfWeek) {
+      2 -> {}
+      3 -> {}
+      4 -> {}
+      5 -> {}
+      6 -> {}
+      else -> router.attachWeekend()
+    }
+  }
+
   fun updateDate(amount: Int) {
+    val prevDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
     if (amount != 0) calendar.add(Calendar.DATE, amount)
     val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) // 1: sun, ... , 7: sat
+
+    detachRouter(prevDayOfWeek)
+    attachRouter(dayOfWeek)
 
     presenter.setFormattedDate(displayFormatter.format(calendar.time))
     GetPushUpRecords().start()
