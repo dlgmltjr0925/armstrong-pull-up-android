@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.mazzeom.app.armstrong.R
+import com.mazzeom.app.armstrong.libs.utils.Dimension
 import org.xmlpull.v1.XmlPullParser
 import java.lang.Exception
 
@@ -48,7 +49,7 @@ class PushUpView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
 	fun setItemStroke(item: LinearLayout, colorResourceId: Int) {
 		(item.background as GradientDrawable).setStroke(
-			dpToPx(3.toFloat(), context),
+			Dimension.dpToPx(3.toFloat(), context),
 			ContextCompat.getColor(context, colorResourceId)
 		)
 	}
@@ -71,10 +72,6 @@ class PushUpView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 			val textView = pushUpCountItem.findViewById<TextView>(R.id.countItemTextView)
 			textView.text = count.toString()
 		}
-	}
-
-	fun dpToPx(dp: Float, context: Context): Int {
-		return (dp * (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)).toInt()
 	}
 }
 

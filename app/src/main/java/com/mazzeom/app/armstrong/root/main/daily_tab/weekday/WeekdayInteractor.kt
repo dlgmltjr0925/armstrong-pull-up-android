@@ -27,6 +27,10 @@ class WeekdayInteractor : Interactor<WeekdayInteractor.WeekdayPresenter, Weekday
     super.didBecomeActive(savedInstanceState)
 
     router.attachPushUpRouter(profile, date)
+    when(dayOfWeek) {
+      2 -> router.attachMondayRouter(profile, date)
+      else -> null
+    }
   }
 
   override fun willResignActive() {

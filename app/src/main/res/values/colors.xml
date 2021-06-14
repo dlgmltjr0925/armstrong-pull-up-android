@@ -15,4 +15,6 @@
   <color name="fetch_init">@color/white</color>
   <color name="fetching">#FFAF7A</color>
   <color name="fetched">#ABD5AB</color>
+  <color name="category1">@color/white</color>
+  <color name="category2">#737473</color>
 </resources>

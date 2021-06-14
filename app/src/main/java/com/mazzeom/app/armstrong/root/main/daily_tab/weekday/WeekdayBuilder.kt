@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
@@ -70,7 +71,7 @@ class WeekdayBuilder(dependency: ParentComponent) :
 				view: WeekdayView,
 				interactor: WeekdayInteractor
 			): WeekdayRouter {
-				return WeekdayRouter(view, interactor, component, PushUpBuilder(component))
+				return WeekdayRouter(view, interactor, component, PushUpBuilder(component), MondayBuilder(component))
 			}
 		}
 
@@ -79,7 +80,8 @@ class WeekdayBuilder(dependency: ParentComponent) :
 
 	@WeekdayScope
 	@dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
-	interface Component : InteractorBaseComponent<WeekdayInteractor>, PushUpBuilder.ParentComponent, BuilderComponent {
+	interface Component : InteractorBaseComponent<WeekdayInteractor>, PushUpBuilder.ParentComponent,
+		MondayBuilder.ParentComponent, BuilderComponent {
 
 		@dagger.Component.Builder
 		interface Builder {
