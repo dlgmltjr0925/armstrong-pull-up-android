@@ -1,10 +1,9 @@
-package com.mazzeom.app.armstrong.root.main.daily_tab.weekday
+package com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
-import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -12,40 +11,38 @@ import dagger.BindsInstance
 import dagger.Provides
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy.CLASS
-import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Scope
 
 /**
- * Builder for the {@link WeekdayScope}.
+ * Builder for the {@link PushUpScope}.
  *
  * TODO describe this scope's responsibility as a whole.
  */
-class WeekdayBuilder(dependency: ParentComponent) :
-	ViewBuilder<WeekdayView, WeekdayRouter, WeekdayBuilder.ParentComponent>(dependency) {
+class PushUpBuilder(dependency: ParentComponent) :
+	ViewBuilder<PushUpView, PushUpRouter, PushUpBuilder.ParentComponent>(dependency) {
 
 	/**
-	 * Builds a new [WeekdayRouter].
+	 * Builds a new [PushUpRouter].
 	 *
 	 * @param parentViewGroup parent view group that this router's view will be added to.
-	 * @return a new [WeekdayRouter].
+	 * @return a new [PushUpRouter].
 	 */
-	fun build(parentViewGroup: ViewGroup, profile: ProfileDTO, date: String, dayOfWeek: Int): WeekdayRouter {
+	fun build(parentViewGroup: ViewGroup, profile: ProfileDTO, date: String): PushUpRouter {
 		val view = createView(parentViewGroup)
-		val interactor = WeekdayInteractor()
-		val component = DaggerWeekdayBuilder_Component.builder()
+		val interactor = PushUpInteractor()
+		val component = DaggerPushUpBuilder_Component.builder()
 			.parentComponent(dependency)
 			.view(view)
 			.interactor(interactor)
 			.profile(profile)
 			.date(date)
-			.dayOfWeek(dayOfWeek)
 			.build()
-		return component.weekdayRouter()
+		return component.pushupRouter()
 	}
 
-	override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): WeekdayView {
-		return inflater.inflate(R.layout.weekday_rib, parentViewGroup, false) as WeekdayView
+	override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): PushUpView {
+		return inflater.inflate(R.layout.push_up_rib, parentViewGroup, false) as PushUpView
 	}
 
 	interface ParentComponent {
@@ -55,39 +52,39 @@ class WeekdayBuilder(dependency: ParentComponent) :
 	@dagger.Module
 	abstract class Module {
 
-		@WeekdayScope
+		@PushUpScope
 		@Binds
-		internal abstract fun presenter(view: WeekdayView): WeekdayInteractor.WeekdayPresenter
+		internal abstract fun presenter(view: PushUpView): PushUpInteractor.PushUpPresenter
 
 		@dagger.Module
 		companion object {
 
-			@WeekdayScope
+			@PushUpScope
 			@Provides
 			@JvmStatic
 			internal fun router(
 				component: Component,
-				view: WeekdayView,
-				interactor: WeekdayInteractor
-			): WeekdayRouter {
-				return WeekdayRouter(view, interactor, component, PushUpBuilder(component))
+				view: PushUpView,
+				interactor: PushUpInteractor
+			): PushUpRouter {
+				return PushUpRouter(view, interactor, component)
 			}
 		}
 
 		// TODO: Create provider methods for dependencies created by this Rib. These should be static.
 	}
 
-	@WeekdayScope
+	@PushUpScope
 	@dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
-	interface Component : InteractorBaseComponent<WeekdayInteractor>, PushUpBuilder.ParentComponent, BuilderComponent {
+	interface Component : InteractorBaseComponent<PushUpInteractor>, BuilderComponent {
 
 		@dagger.Component.Builder
 		interface Builder {
 			@BindsInstance
-			fun interactor(interactor: WeekdayInteractor): Builder
+			fun interactor(interactor: PushUpInteractor): Builder
 
 			@BindsInstance
-			fun view(view: WeekdayView): Builder
+			fun view(view: PushUpView): Builder
 
 			fun parentComponent(component: ParentComponent): Builder
 
@@ -98,21 +95,18 @@ class WeekdayBuilder(dependency: ParentComponent) :
 
 			@BindsInstance
 			fun date(date: String): Builder
-
-			@BindsInstance
-			fun dayOfWeek(dayOfWeek: Number): Builder
 		}
 	}
 
 	interface BuilderComponent {
-		fun weekdayRouter(): WeekdayRouter
+		fun pushupRouter(): PushUpRouter
 	}
 
 	@Scope
 	@Retention(CLASS)
-	internal annotation class WeekdayScope
+	internal annotation class PushUpScope
 
 	@Qualifier
 	@Retention(CLASS)
-	internal annotation class WeekdayInternal
+	internal annotation class PushUpInternal
 }

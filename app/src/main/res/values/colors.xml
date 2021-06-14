@@ -12,4 +12,7 @@
   <color name="edit_text_background">#232222</color>
   <color name="edit_text_hint_color">#737473</color>
   <color name="button_pressed_background">#11ffffff</color>
+  <color name="fetch_init">@color/white</color>
+  <color name="fetching">#FFAF7A</color>
+  <color name="fetched">#ABD5AB</color>
 </resources>

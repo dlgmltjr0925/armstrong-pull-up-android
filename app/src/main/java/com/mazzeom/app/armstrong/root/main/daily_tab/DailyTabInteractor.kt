@@ -16,6 +16,7 @@ import java.util.*
 import javax.inject.Inject
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.DayOfWeek
 
 /**
  * Coordinates Business Logic for [DailyTabScope].
@@ -39,6 +40,7 @@ class DailyTabInteractor : Interactor<DailyTabInteractor.DailyTabPresenter, Dail
 
     onChangeProfile.subscribe { profile ->
       this.profile = profile
+      updateDate(0)
     }
 
     presenter.onClickPrevDateButton().subscribe {
@@ -48,8 +50,6 @@ class DailyTabInteractor : Interactor<DailyTabInteractor.DailyTabPresenter, Dail
     presenter.onClickNextDateButton().subscribe {
       updateDate(1)
     }
-
-    updateDate(0)
   }
 
   override fun willResignActive() {
@@ -60,22 +60,22 @@ class DailyTabInteractor : Interactor<DailyTabInteractor.DailyTabPresenter, Dail
 
   fun detachRouter(dayOfWeek: Int) {
     when(dayOfWeek) {
-      2 -> {}
-      3 -> {}
-      4 -> {}
-      5 -> {}
-      6 -> {}
+      2 -> router.detachWeekday()
+      3 -> router.detachWeekday()
+      4 -> router.detachWeekday()
+      5 -> router.detachWeekday()
+      6 -> router.detachWeekday()
       else -> router.detachWeekend()
     }
   }
 
-  fun attachRouter(dayOfWeek: Int) {
+  fun attachRouter(date: String, dayOfWeek: Int) {
     when(dayOfWeek) {
-      2 -> {}
-      3 -> {}
-      4 -> {}
-      5 -> {}
-      6 -> {}
+      2 -> router.attachWeekday(profile, date, dayOfWeek)
+      3 -> router.attachWeekday(profile, date, dayOfWeek)
+      4 -> router.attachWeekday(profile, date, dayOfWeek)
+      5 -> router.attachWeekday(profile, date, dayOfWeek)
+      6 -> router.attachWeekday(profile, date, dayOfWeek)
       else -> router.attachWeekend()
     }
   }
@@ -86,11 +86,11 @@ class DailyTabInteractor : Interactor<DailyTabInteractor.DailyTabPresenter, Dail
     val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) // 1: sun, ... , 7: sat
 
     detachRouter(prevDayOfWeek)
-    attachRouter(dayOfWeek)
+    attachRouter(apiFormatter.format(calendar.time), dayOfWeek)
 
     presenter.setFormattedDate(displayFormatter.format(calendar.time))
-    GetPushUpRecords().start()
-    GetPullUpRecords().start()
+//    GetPushUpRecords().start()
+//    GetPullUpRecords().start()
   }
 
   /**

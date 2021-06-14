@@ -1,5 +1,9 @@
 package com.mazzeom.app.armstrong.root.main.daily_tab.push_up
 
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpBuilder
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpInteractor
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpRouter
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpView
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.RouterHelper
 

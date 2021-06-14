@@ -1,5 +1,6 @@
 package com.mazzeom.app.armstrong.root.main.daily_tab
 
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.WeekdayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekend.WeekendBuilder
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.RouterHelper
@@ -21,7 +22,7 @@ class DailyTabRouterTest : RibTestBasePlaceholder() {
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    router = DailyTabRouter(view, interactor, component, WeekendBuilder(component))
+    router = DailyTabRouter(view, interactor, component, WeekendBuilder(component), WeekdayBuilder(component))
   }
 
   /**

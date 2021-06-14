@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="FetchState">
+		<attr name="state_fetch_init" format="boolean" />
+		<attr name="state_fetching" format="boolean" />
+		<attr name="state_fetched" format="boolean" />
+	</declare-styleable>
+</resources>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="60dp"
-	android:layout_height="60dp"
+	android:layout_width="48dp"
+	android:layout_height="48dp"
 	android:background="@drawable/count_item_background"
 	android:gravity="center">
 
@@ -10,8 +10,8 @@
 		android:id="@+id/countItemTextView"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="0"
+		android:text=""
 		android:textColor="@color/white"
-		android:textSize="25sp"/>
+		android:textSize="23sp"/>
 
 </LinearLayout>

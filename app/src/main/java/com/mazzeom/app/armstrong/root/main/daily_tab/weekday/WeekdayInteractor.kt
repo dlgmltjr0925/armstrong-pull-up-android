@@ -1,9 +1,13 @@
 package com.mazzeom.app.armstrong.root.main.daily_tab.weekday
 
+import android.annotation.SuppressLint
+import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
+import java.time.DayOfWeek
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 /**
  * Coordinates Business Logic for [WeekdayScope].
@@ -13,19 +17,20 @@ import javax.inject.Inject
 @RibInteractor
 class WeekdayInteractor : Interactor<WeekdayInteractor.WeekdayPresenter, WeekdayRouter>() {
 
-  @Inject
-  lateinit var presenter: WeekdayPresenter
+  @Inject lateinit var presenter: WeekdayPresenter
+  @Inject lateinit var date: String
+  @Inject lateinit var profile: ProfileDTO
+  @Inject lateinit var dayOfWeek: Number
 
+  @SuppressLint("MissingSuperCall")
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
 
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
+    router.attachPushUpRouter(profile, date)
   }
 
   override fun willResignActive() {
     super.willResignActive()
-
-    // TODO: Perform any required clean up here, or delete this method entirely if not needed.
   }
 
   /**
