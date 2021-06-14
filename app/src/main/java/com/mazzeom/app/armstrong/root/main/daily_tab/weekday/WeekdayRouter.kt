@@ -8,6 +8,8 @@ import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayBuilde
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayRouter
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpRouter
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.tuesday.TuesdayBuilder
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.tuesday.TuesdayRouter
 
 import com.uber.rib.core.ViewRouter
 import javax.inject.Inject
@@ -18,32 +20,42 @@ import javax.inject.Inject
  * TODO describe the possible child configurations of this scope.
  */
 class WeekdayRouter(
-    view: WeekdayView,
-    interactor: WeekdayInteractor,
-    component: WeekdayBuilder.Component,
-    pushUpBuilder: PushUpBuilder,
-    mondayBuilder: MondayBuilder
+	view: WeekdayView,
+	interactor: WeekdayInteractor,
+	component: WeekdayBuilder.Component,
+	pushUpBuilder: PushUpBuilder,
+	mondayBuilder: MondayBuilder,
+	tuesdayBuilder: TuesdayBuilder
 ) : ViewRouter<WeekdayView, WeekdayInteractor>(view, interactor, component) {
-    val pushUpBuilder = pushUpBuilder
-    var mondayBuilder = mondayBuilder
+	val pushUpBuilder = pushUpBuilder
+	var mondayBuilder = mondayBuilder
+	val tuesdayBuilder = tuesdayBuilder
 
-    var pushUpRouter: PushUpRouter? = null
-    var mondayRouter: MondayRouter? = null
+	var pushUpRouter: PushUpRouter? = null
+	var mondayRouter: MondayRouter? = null
+	var tuesdayRouter: TuesdayRouter? = null
 
-    var pushUpFrameLayout: FrameLayout? = null
-    var pullUpFrameLayout: FrameLayout? = null
+	var pushUpFrameLayout: FrameLayout? = null
+	var pullUpFrameLayout: FrameLayout? = null
 
-    fun attachPushUpRouter(profile: ProfileDTO, date: String) {
-        pushUpRouter = pushUpBuilder.build(view, profile, date)
-        attachChild(pushUpRouter!!)
-        if (pushUpFrameLayout == null) pushUpFrameLayout = view.findViewById(R.id.pushUpFrameLayout)
-        pushUpFrameLayout!!.addView(pushUpRouter!!.view)
-    }
+	fun attachPushUpRouter(profile: ProfileDTO, date: String) {
+		pushUpRouter = pushUpBuilder.build(view, profile, date)
+		attachChild(pushUpRouter!!)
+		if (pushUpFrameLayout == null) pushUpFrameLayout = view.findViewById(R.id.pushUpFrameLayout)
+		pushUpFrameLayout!!.addView(pushUpRouter!!.view)
+	}
 
-    fun attachMondayRouter(profile: ProfileDTO, date: String) {
-        mondayRouter = mondayBuilder.build(view, profile, date)
-        attachChild(mondayRouter!!)
-        if (pullUpFrameLayout == null) pullUpFrameLayout = view.findViewById(R.id.pullUpFrameLayout)
-        pullUpFrameLayout!!.addView(mondayRouter!!.view)
-    }
+	fun attachMondayRouter(profile: ProfileDTO, date: String) {
+		mondayRouter = mondayBuilder.build(view, profile, date)
+		attachChild(mondayRouter!!)
+		if (pullUpFrameLayout == null) pullUpFrameLayout = view.findViewById(R.id.pullUpFrameLayout)
+		pullUpFrameLayout!!.addView(mondayRouter!!.view)
+	}
+
+	fun attachTuesdayRouter(profile: ProfileDTO, date: String) {
+		tuesdayRouter = tuesdayBuilder.build(view, profile, date)
+		attachChild(tuesdayRouter!!)
+		if (pullUpFrameLayout == null) pullUpFrameLayout = view.findViewById(R.id.pullUpFrameLayout)
+		pullUpFrameLayout!!.addView(tuesdayRouter!!.view)
+	}
 }
