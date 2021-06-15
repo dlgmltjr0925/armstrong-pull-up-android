@@ -48,8 +48,9 @@ class PushUpView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 	}
 
 	fun setItemStroke(item: LinearLayout, colorResourceId: Int) {
-		(item.background as GradientDrawable).setStroke(
-			Dimension.dpToPx(3.toFloat(), context),
+		val countItemLinearLayout: LinearLayout = item.findViewById(R.id.countItemLinearLayout)
+		(countItemLinearLayout.background as GradientDrawable).setStroke(
+			Dimension.dpToPx(3, context),
 			ContextCompat.getColor(context, colorResourceId)
 		)
 	}

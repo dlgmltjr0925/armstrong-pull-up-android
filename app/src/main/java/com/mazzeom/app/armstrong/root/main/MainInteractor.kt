@@ -1,5 +1,6 @@
 package com.mazzeom.app.armstrong.root.main
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.jakewharton.rxrelay3.BehaviorRelay
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
@@ -24,6 +25,7 @@ class MainInteractor(profile: ProfileDTO) : Interactor<MainInteractor.MainPresen
 
   @Inject lateinit var presenter: MainPresenter
 
+  @SuppressLint("MissingSuperCall")
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
     

@@ -6,6 +6,8 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.GridLayout
+import android.widget.GridView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -28,33 +30,41 @@ class MondayView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 	}
 
 	lateinit var pullUpFlexboxLayout: FlexboxLayout
+	lateinit var pullUpGridLayout: GridLayout
 	var countItems: MutableList<LinearLayout> = mutableListOf()
 
 	override fun onFinishInflate() {
 		super.onFinishInflate()
 
 		pullUpFlexboxLayout = findViewById(R.id.pullUpFlexboxLayout)
+		pullUpGridLayout = findViewById(R.id.pullUpGridLayout)
 		val layoutInflater = context.getSystemService(Service.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
 		for (i in 0..4) {
 			val countItem = layoutInflater.inflate(R.layout.count_item, this, false) as LinearLayout
+
 			countItems.add(countItem)
-			pullUpFlexboxLayout.addView(countItem)
+			pullUpGridLayout.addView(countItem)
 		}
 	}
 
-	override fun setCountItem(order: Int, count: Int, state: Int) {
-		val countItem = countItems[order - 1]
-		val textView = countItem.findViewById<TextView>(R.id.countItemTextView)
-		textView.text = count.toString()
+	fun setItemStroke(countItem: LinearLayout, state: Int) {
+		val countItemLinearLayout = countItem.findViewById<LinearLayout>(R.id.countItemLinearLayout)
 		val colorResourceId = when (state) {
 			STATE_FETCHING -> R.color.fetching
 			STATE_FETCHED -> R.color.fetched
 			else -> R.color.fetch_init
 		}
-		(countItem.background as GradientDrawable).setStroke(
+		(countItemLinearLayout.background as GradientDrawable).setStroke(
 			Dimension.dpToPx(3.toFloat(), context),
 			ContextCompat.getColor(context, colorResourceId)
 		)
+	}
+
+	override fun setCountItem(order: Int, count: Int, state: Int) {
+		val countItem = countItems[order - 1]
+		setItemStroke(countItem, state)
+		val textView = countItem.findViewById<TextView>(R.id.countItemTextView)
+		textView.text = count.toString()
 	}
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="24dp"
-    android:orientation="vertical">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:paddingTop="24dp"
+	android:orientation="vertical">
 
 	<TextView
 		android:layout_width="match_parent"
@@ -16,59 +16,34 @@
 		android:layout_marginLeft="24dp"
 		android:layout_marginBottom="24dp"/>
 
-	<LinearLayout
+	<GridLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal">
+		android:orientation="horizontal"
+		android:numColumns="3">
 
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:orientation="horizontal"
-			android:gravity="center">
+		<include
+			android:id="@+id/pushUpCountItem1"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:layout_columnWeight="1"
+			layout="@layout/count_item"/>
 
-			<include
-				android:id="@+id/pushUpCountItem1"
-				android:layout_width="50dp"
-				android:layout_height="50dp"
-				layout="@layout/count_item" />
+		<include
+			android:id="@+id/pushUpCountItem2"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:layout_columnWeight="1"
+			layout="@layout/count_item"/>
 
-		</LinearLayout>
+		<include
+			android:id="@+id/pushUpCountItem3"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:layout_columnWeight="1"
+			layout="@layout/count_item"/>
 
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:orientation="horizontal"
-			android:gravity="center">
-
-			<include
-				android:id="@+id/pushUpCountItem2"
-				android:layout_width="50dp"
-				android:layout_height="50dp"
-				layout="@layout/count_item" />
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:orientation="horizontal"
-			android:gravity="center">
-
-			<include
-				android:id="@+id/pushUpCountItem3"
-				android:layout_width="50dp"
-				android:layout_height="50dp"
-				layout="@layout/count_item" />
-
-		</LinearLayout>
-
-
-	</LinearLayout>
-
+	</GridLayout>
 
 
 </com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpView>

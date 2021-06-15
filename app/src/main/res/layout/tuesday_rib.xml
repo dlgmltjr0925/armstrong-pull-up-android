@@ -31,7 +31,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		app:flexDirection="row"
-		app:justifyContent="flex_start"
 		app:alignItems="center"
 		app:flexWrap="wrap"
 		android:layout_marginHorizontal="20dp"/>

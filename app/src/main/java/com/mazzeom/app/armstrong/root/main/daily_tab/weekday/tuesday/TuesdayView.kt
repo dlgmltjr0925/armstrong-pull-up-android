@@ -52,6 +52,7 @@ class TuesdayView @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
 		var layoutParams = countItem.layoutParams as LinearLayout.LayoutParams
 
+
 		layoutParams.setMargins(0, 0, Dimension.dpToPx(20, context), Dimension.dpToPx(20, context))
 		countItem.layoutParams = layoutParams
 

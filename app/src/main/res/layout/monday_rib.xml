@@ -34,5 +34,15 @@
 		app:justifyContent="space_around"
 		app:alignItems="center" />
 
+	<GridLayout
+		android:id="@+id/pullUpGridLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:columnCount="5"
+		android:orientation="horizontal"
+		android:alignmentMode="alignMargins">
+
+	</GridLayout>
+
 
 </com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayView>
