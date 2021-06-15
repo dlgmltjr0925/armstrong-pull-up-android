@@ -4,17 +4,13 @@ import android.app.Service
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.GridLayout
-import android.widget.GridView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.google.android.flexbox.FlexboxLayout
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.utils.Dimension
-import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpView
 
 
 /**
@@ -29,14 +25,12 @@ class MondayView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 		val STATE_FETCHED = 2
 	}
 
-	lateinit var pullUpFlexboxLayout: FlexboxLayout
 	lateinit var pullUpGridLayout: GridLayout
 	var countItems: MutableList<LinearLayout> = mutableListOf()
 
 	override fun onFinishInflate() {
 		super.onFinishInflate()
 
-		pullUpFlexboxLayout = findViewById(R.id.pullUpFlexboxLayout)
 		pullUpGridLayout = findViewById(R.id.pullUpGridLayout)
 		val layoutInflater = context.getSystemService(Service.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

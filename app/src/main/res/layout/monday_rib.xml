@@ -4,43 +4,14 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:paddingTop="48dp">
-
-	<TextView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="풀업 5세트"
-		android:textFontWeight="500"
-		android:textColor="@color/category1"
-		android:textSize="20sp"
-		android:layout_marginLeft="24dp"
-		android:layout_marginBottom="12dp"/>
-
-	<TextView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="최대 반복 횟수, 쉬는 시간: 90초"
-		android:layout_marginLeft="24dp"
-		android:textColor="@color/category2"
-		android:layout_marginBottom="12dp"
-		android:textSize="16sp" />
-
-	<com.google.android.flexbox.FlexboxLayout
-		android:id="@+id/pullUpFlexboxLayout"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		app:flexDirection="row"
-		app:justifyContent="space_around"
-		app:alignItems="center" />
+	android:orientation="vertical">
 
 	<GridLayout
 		android:id="@+id/pullUpGridLayout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:columnCount="5"
-		android:orientation="horizontal"
-		android:alignmentMode="alignMargins">
+		android:orientation="horizontal">
 
 	</GridLayout>
 
