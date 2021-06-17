@@ -4,13 +4,17 @@ import android.app.Service
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.GridLayout
 import android.widget.LinearLayout
+import android.widget.TableLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.utils.Dimension
+import java.util.*
 
 
 /**
@@ -26,17 +30,24 @@ class MondayView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 	}
 
 	lateinit var pullUpGridLayout: GridLayout
+	lateinit var gridLayoutManager: GridLayoutManager
 	var countItems: MutableList<LinearLayout> = mutableListOf()
 
 	override fun onFinishInflate() {
 		super.onFinishInflate()
 
 		pullUpGridLayout = findViewById(R.id.pullUpGridLayout)
+		gridLayoutManager = GridLayoutManager(context, 5)
+
 		val layoutInflater = context.getSystemService(Service.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
 		for (i in 0..4) {
 			val countItem = layoutInflater.inflate(R.layout.count_item, this, false) as LinearLayout
-
+			val layoutParams = GridLayout.LayoutParams()
+			layoutParams.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+			countItem.layoutParams = layoutParams
+			val countItemTextView = countItem.findViewById<TextView>(R.id.countItemTextView)
+			countItemTextView.text = "0"
 			countItems.add(countItem)
 			pullUpGridLayout.addView(countItem)
 		}
