@@ -41,7 +41,7 @@ class WeekdayInteractor : Interactor<WeekdayInteractor.WeekdayPresenter, Weekday
     }
     when(dayOfWeek) {
       2 -> router.attachMondayRouter(profile, date)
-//      3 -> router.attachTuesdayRouter(profile, date)
+      3 -> router.attachTuesdayRouter(profile, date)
       else -> null
     }
   }

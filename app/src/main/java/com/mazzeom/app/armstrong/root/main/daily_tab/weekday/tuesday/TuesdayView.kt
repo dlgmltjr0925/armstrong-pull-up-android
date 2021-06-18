@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -24,43 +25,43 @@ class TuesdayView @JvmOverloads constructor(context: Context, attrs: AttributeSe
 		val STATE_FETCHED = 2
 	}
 
-	lateinit var pullUpFlexboxLayout: FlexboxLayout
+	lateinit var pullUpGridLayout: GridLayout
 	lateinit var layoutInflater: LayoutInflater
 	val countItems: MutableList<LinearLayout> = mutableListOf()
 
 	override fun onFinishInflate() {
 		super.onFinishInflate()
 
-		pullUpFlexboxLayout = findViewById(R.id.pullUpFlexboxLayout)
+		pullUpGridLayout = findViewById(R.id.pullUpGridLayout)
 		layoutInflater = context.getSystemService(Service.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 	}
 
-	fun setStroke(countItem: LinearLayout, state: Int) {
+	fun setItemStroke(countItem: LinearLayout, state: Int) {
+		val countItemLinearLayout = countItem.findViewById<LinearLayout>(R.id.countItemLinearLayout)
 		val colorResourceId = when (state) {
 			STATE_FETCHING -> R.color.fetching
 			else -> R.color.fetched
 		}
 
-		(countItem.background as GradientDrawable).setStroke(
+		(countItemLinearLayout.background as GradientDrawable).setStroke(
 			Dimension.dpToPx(3.toFloat(), context),
 			ContextCompat.getColor(context, colorResourceId)
 		)
 	}
 
 	override fun addCountItem(order: Int, count: Int, state: Int) {
-		var countItem = layoutInflater.inflate(R.layout.count_item, this, false) as LinearLayout
+		val countItem = layoutInflater.inflate(R.layout.count_item, this, false) as LinearLayout
 
-		var layoutParams = countItem.layoutParams as LinearLayout.LayoutParams
-
-
-		layoutParams.setMargins(0, 0, Dimension.dpToPx(20, context), Dimension.dpToPx(20, context))
+		val layoutParams = GridLayout.LayoutParams()
+		layoutParams.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+		layoutParams.bottomMargin = Dimension.dpToPx(20, context)
 		countItem.layoutParams = layoutParams
-
-		val textView = countItem.findViewById<TextView>(R.id.countItemTextView)
-		textView.text = count.toString()
+		setItemStroke(countItem, state)
+		val countItemTextView = countItem.findViewById<TextView>(R.id.countItemTextView)
+		countItemTextView.text = count.toString()
 
 		countItems.add(countItem)
-		pullUpFlexboxLayout.addView(countItem)
+		pullUpGridLayout.addView(countItem)
 	}
 
 	override fun setCountItem(order: Int, count: Int, state: Int) {

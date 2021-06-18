@@ -2,6 +2,7 @@ package com.mazzeom.app.armstrong.root.main.daily_tab.weekday.tuesday
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.widget.LinearLayout
 import com.mazzeom.app.armstrong.libs.api.Api
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.mazzeom.app.armstrong.libs.api.response.GetRecordByProfileIdAndDateResponse
@@ -25,6 +26,7 @@ class TuesdayInteractor : Interactor<TuesdayInteractor.TuesdayPresenter, Tuesday
   @Inject lateinit var presenter: TuesdayPresenter
   @Inject lateinit var profile: ProfileDTO
   @Inject lateinit var date: String
+  val countItems: MutableList<LinearLayout> = mutableListOf()
 
   @SuppressLint("MissingSuperCall")
   override fun didBecomeActive(savedInstanceState: Bundle?) {

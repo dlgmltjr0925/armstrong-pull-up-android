@@ -56,7 +56,6 @@ class PushUpView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 	}
 
 	override fun setPushUpCount(order: Int, count: Int, state: Int) {
-		Log.d("setPushUpCount", "order: ${order}, count: ${count}")
 		val pushUpCountItem: LinearLayout? = when (order) {
 			1 -> pushUpCountItem1
 			2 -> pushUpCountItem2
