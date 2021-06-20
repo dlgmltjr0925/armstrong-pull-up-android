@@ -10,6 +10,8 @@ import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpBuild
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpRouter
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.tuesday.TuesdayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.tuesday.TuesdayRouter
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.wednesday.WednesdayBuilder
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.wednesday.WednesdayRouter
 
 import com.uber.rib.core.ViewRouter
 import javax.inject.Inject
@@ -25,15 +27,18 @@ class WeekdayRouter(
 	component: WeekdayBuilder.Component,
 	pushUpBuilder: PushUpBuilder,
 	mondayBuilder: MondayBuilder,
-	tuesdayBuilder: TuesdayBuilder
+	tuesdayBuilder: TuesdayBuilder,
+	wednesdayBuilder: WednesdayBuilder
 ) : ViewRouter<WeekdayView, WeekdayInteractor>(view, interactor, component) {
 	val pushUpBuilder = pushUpBuilder
 	var mondayBuilder = mondayBuilder
 	val tuesdayBuilder = tuesdayBuilder
+	val wednesdayBuilder = wednesdayBuilder
 
 	var pushUpRouter: PushUpRouter? = null
 	var mondayRouter: MondayRouter? = null
 	var tuesdayRouter: TuesdayRouter? = null
+	var wednesdayRouter: WednesdayRouter? = null
 
 	var pushUpFrameLayout: FrameLayout? = null
 	var pullUpFrameLayout: FrameLayout? = null
@@ -57,5 +62,12 @@ class WeekdayRouter(
 		attachChild(tuesdayRouter!!)
 		if (pullUpFrameLayout == null) pullUpFrameLayout = view.findViewById(R.id.pullUpFrameLayout)
 		pullUpFrameLayout!!.addView(tuesdayRouter!!.view)
+	}
+
+	fun attachWednesdayRouter(profile: ProfileDTO, date: String) {
+		wednesdayRouter = wednesdayBuilder.build(view, profile, date)
+		attachChild(wednesdayRouter!!)
+		if (pullUpFrameLayout == null) pullUpFrameLayout = view.findViewById(R.id.pullUpFrameLayout)
+		pullUpFrameLayout!!.addView(wednesdayRouter!!.view)
 	}
 }

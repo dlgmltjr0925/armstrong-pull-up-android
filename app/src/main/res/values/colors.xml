@@ -16,5 +16,6 @@
   <color name="fetching">#FFAF7A</color>
   <color name="fetched">#ABD5AB</color>
   <color name="category1">@color/white</color>
-  <color name="category2">#737473</color>
+  <color name="category2">#CCCCCC</color>
+  <color name="description">#737473</color>
 </resources>

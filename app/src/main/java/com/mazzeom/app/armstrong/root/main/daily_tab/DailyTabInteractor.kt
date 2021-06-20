@@ -89,8 +89,6 @@ class DailyTabInteractor : Interactor<DailyTabInteractor.DailyTabPresenter, Dail
     attachRouter(apiFormatter.format(calendar.time), dayOfWeek)
 
     presenter.setFormattedDate(displayFormatter.format(calendar.time))
-//    GetPushUpRecords().start()
-//    GetPullUpRecords().start()
   }
 
   /**
@@ -100,47 +98,5 @@ class DailyTabInteractor : Interactor<DailyTabInteractor.DailyTabPresenter, Dail
     fun onClickPrevDateButton(): Observable<Unit>
     fun onClickNextDateButton(): Observable<Unit>
     fun setFormattedDate(formattedDate: String)
-  }
-
-  inner class GetPushUpRecords: Thread() {
-    override fun run() {
-      val service = Api.create()
-      service
-        .getPushUpByProfileIdAndDateRequest(profile.id, apiFormatter.format(calendar.time))
-        .enqueue(object : Callback<GetPushUpByProfileIdAndDateResponse> {
-          override fun onResponse(
-            call: Call<GetPushUpByProfileIdAndDateResponse>,
-            response: Response<GetPushUpByProfileIdAndDateResponse>
-          ) {
-            val records = response.body()?.records
-            Log.d("DailyTab#PushUp", "size: ${records?.size}")
-          }
-
-          override fun onFailure(call: Call<GetPushUpByProfileIdAndDateResponse>, t: Throwable) {
-            Log.d("DailyTab#PushUp", t.toString())
-          }
-        })
-    }
-  }
-
-  inner class GetPullUpRecords: Thread() {
-    override fun run() {
-      val service = Api.create()
-      service
-        .getRecordByProfileIdAndDateRequest(profile.id, apiFormatter.format(calendar.time))
-        .enqueue(object: Callback<GetRecordByProfileIdAndDateResponse> {
-          override fun onResponse(
-            call: Call<GetRecordByProfileIdAndDateResponse>,
-            response: Response<GetRecordByProfileIdAndDateResponse>
-          ) {
-            val records = response.body()?.records
-            Log.d("DailyTab#PullUp", "size: ${records?.size}")
-          }
-
-          override fun onFailure(call: Call<GetRecordByProfileIdAndDateResponse>, t: Throwable) {
-            Log.d("DailyTab#PullUp", t.toString())
-          }
-        })
-    }
   }
 }
