@@ -6,6 +6,7 @@ import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpBuilder
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.thursday.ThursdayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.tuesday.TuesdayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.wednesday.WednesdayBuilder
 import com.uber.rib.core.InteractorBaseComponent
@@ -79,7 +80,8 @@ class WeekdayBuilder(dependency: ParentComponent) :
 					PushUpBuilder(component),
 					MondayBuilder(component),
 					TuesdayBuilder(component),
-					WednesdayBuilder(component)
+					WednesdayBuilder(component),
+					ThursdayBuilder(component)
 				)
 			}
 		}
@@ -91,6 +93,7 @@ class WeekdayBuilder(dependency: ParentComponent) :
 	@dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
 	interface Component : InteractorBaseComponent<WeekdayInteractor>, PushUpBuilder.ParentComponent,
 		MondayBuilder.ParentComponent, TuesdayBuilder.ParentComponent, WednesdayBuilder.ParentComponent,
+		ThursdayBuilder.ParentComponent,
 		BuilderComponent {
 
 		@dagger.Component.Builder

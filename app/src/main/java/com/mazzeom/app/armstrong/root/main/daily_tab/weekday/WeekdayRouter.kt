@@ -8,6 +8,8 @@ import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayBuilde
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayRouter
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpRouter
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.thursday.ThursdayBuilder
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.thursday.ThursdayRouter
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.tuesday.TuesdayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.tuesday.TuesdayRouter
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.wednesday.WednesdayBuilder
@@ -28,17 +30,20 @@ class WeekdayRouter(
 	pushUpBuilder: PushUpBuilder,
 	mondayBuilder: MondayBuilder,
 	tuesdayBuilder: TuesdayBuilder,
-	wednesdayBuilder: WednesdayBuilder
+	wednesdayBuilder: WednesdayBuilder,
+	thursdayBuilder: ThursdayBuilder
 ) : ViewRouter<WeekdayView, WeekdayInteractor>(view, interactor, component) {
 	val pushUpBuilder = pushUpBuilder
 	var mondayBuilder = mondayBuilder
 	val tuesdayBuilder = tuesdayBuilder
 	val wednesdayBuilder = wednesdayBuilder
+	val thursdayBuilder = thursdayBuilder
 
 	var pushUpRouter: PushUpRouter? = null
 	var mondayRouter: MondayRouter? = null
 	var tuesdayRouter: TuesdayRouter? = null
 	var wednesdayRouter: WednesdayRouter? = null
+	var thursdayRouter: ThursdayRouter? = null
 
 	var pushUpFrameLayout: FrameLayout? = null
 	var pullUpFrameLayout: FrameLayout? = null
@@ -69,5 +74,12 @@ class WeekdayRouter(
 		attachChild(wednesdayRouter!!)
 		if (pullUpFrameLayout == null) pullUpFrameLayout = view.findViewById(R.id.pullUpFrameLayout)
 		pullUpFrameLayout!!.addView(wednesdayRouter!!.view)
+	}
+
+	fun attachThursdayRouter(profile: ProfileDTO, date: String) {
+		thursdayRouter = thursdayBuilder.build(view, profile, date)
+		attachChild(thursdayRouter!!)
+		if (pullUpFrameLayout == null) pullUpFrameLayout = view.findViewById(R.id.pullUpFrameLayout)
+		pullUpFrameLayout!!.addView(thursdayRouter!!.view)
 	}
 }
