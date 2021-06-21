@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal"
+	android:layout_width="match_parent"
+	android:layout_height="48dp"
+	android:paddingHorizontal="20dp"
+	android:layout_marginTop="12dp"
+	android:background="@color/black">
+
+	<TextView
+		android:id="@+id/dayOfWeekTextView"
+		android:layout_width="48dp"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:textAlignment="center"
+		android:text="월"
+		android:textColor="@color/white"
+		android:textSize="18sp"/>
+
+	<LinearLayout
+		android:id="@+id/routineButton"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:background="@drawable/friday_routine_item_background">
+
+		<TextView
+			android:id="@+id/routineTextView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:text="풀업 5세트"
+			android:textColor="@color/white"
+			android:gravity="center_vertical"
+			android:textSize="18sp"
+			android:paddingLeft="20dp"/>
+
+	</LinearLayout>
+
+</LinearLayout>

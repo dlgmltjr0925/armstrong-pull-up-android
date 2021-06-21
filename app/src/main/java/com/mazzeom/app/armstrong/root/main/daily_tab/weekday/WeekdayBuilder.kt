@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.friday.FridayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.thursday.ThursdayBuilder
@@ -81,7 +82,8 @@ class WeekdayBuilder(dependency: ParentComponent) :
 					MondayBuilder(component),
 					TuesdayBuilder(component),
 					WednesdayBuilder(component),
-					ThursdayBuilder(component)
+					ThursdayBuilder(component),
+					FridayBuilder(component)
 				)
 			}
 		}
@@ -93,7 +95,7 @@ class WeekdayBuilder(dependency: ParentComponent) :
 	@dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
 	interface Component : InteractorBaseComponent<WeekdayInteractor>, PushUpBuilder.ParentComponent,
 		MondayBuilder.ParentComponent, TuesdayBuilder.ParentComponent, WednesdayBuilder.ParentComponent,
-		ThursdayBuilder.ParentComponent,
+		ThursdayBuilder.ParentComponent, FridayBuilder.ParentComponent,
 		BuilderComponent {
 
 		@dagger.Component.Builder

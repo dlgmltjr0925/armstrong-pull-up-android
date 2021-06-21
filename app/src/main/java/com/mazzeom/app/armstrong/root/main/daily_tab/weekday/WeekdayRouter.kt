@@ -4,6 +4,8 @@ import android.view.View
 import android.widget.FrameLayout
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.friday.FridayBuilder
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.friday.FridayRouter
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayRouter
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpBuilder
@@ -31,19 +33,22 @@ class WeekdayRouter(
 	mondayBuilder: MondayBuilder,
 	tuesdayBuilder: TuesdayBuilder,
 	wednesdayBuilder: WednesdayBuilder,
-	thursdayBuilder: ThursdayBuilder
+	thursdayBuilder: ThursdayBuilder,
+	fridayBuilder: FridayBuilder
 ) : ViewRouter<WeekdayView, WeekdayInteractor>(view, interactor, component) {
 	val pushUpBuilder = pushUpBuilder
 	var mondayBuilder = mondayBuilder
 	val tuesdayBuilder = tuesdayBuilder
 	val wednesdayBuilder = wednesdayBuilder
 	val thursdayBuilder = thursdayBuilder
+	val fridayBuilder = fridayBuilder
 
 	var pushUpRouter: PushUpRouter? = null
 	var mondayRouter: MondayRouter? = null
 	var tuesdayRouter: TuesdayRouter? = null
 	var wednesdayRouter: WednesdayRouter? = null
 	var thursdayRouter: ThursdayRouter? = null
+	var fridayRouter: FridayRouter? = null
 
 	var pushUpFrameLayout: FrameLayout? = null
 	var pullUpFrameLayout: FrameLayout? = null
@@ -81,5 +86,20 @@ class WeekdayRouter(
 		attachChild(thursdayRouter!!)
 		if (pullUpFrameLayout == null) pullUpFrameLayout = view.findViewById(R.id.pullUpFrameLayout)
 		pullUpFrameLayout!!.addView(thursdayRouter!!.view)
+	}
+
+	fun attachFridayRouter() {
+		fridayRouter = fridayBuilder.build(view)
+		attachChild(fridayRouter!!)
+		if (pullUpFrameLayout == null) pullUpFrameLayout = view.findViewById(R.id.pullUpFrameLayout)
+		pullUpFrameLayout!!.addView(fridayRouter!!.view)
+	}
+
+	fun detachFridayRouter() {
+		if (fridayRouter != null) {
+			detachChild(fridayRouter!!)
+			if (pullUpFrameLayout != null) pullUpFrameLayout!!.removeView(fridayRouter!!.view)
+			fridayRouter = null
+		}
 	}
 }
