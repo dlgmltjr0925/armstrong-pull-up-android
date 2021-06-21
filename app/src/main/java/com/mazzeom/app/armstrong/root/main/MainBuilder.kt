@@ -51,7 +51,7 @@ class MainBuilder(dependency: ParentComponent) : ViewBuilder<MainView, MainRoute
   }
 
   interface ParentComponent {
-    // TODO: Define dependencies required from your parent interactor here.
+    fun mainListener(): MainInteractor.Listener
   }
 
   @dagger.Module

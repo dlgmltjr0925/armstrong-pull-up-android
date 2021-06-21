@@ -1,5 +1,6 @@
 package com.mazzeom.app.armstrong.root.sign_in
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.mazzeom.app.armstrong.libs.api.Api
 import com.mazzeom.app.armstrong.libs.api.response.GetProfileResponse
@@ -24,6 +25,7 @@ class SignInInteractor : Interactor<SignInInteractor.SignInPresenter, SignInRout
   @Inject lateinit var listener: Listener
   @Inject lateinit var presenter: SignInPresenter
 
+  @SuppressLint("MissingSuperCall")
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
 

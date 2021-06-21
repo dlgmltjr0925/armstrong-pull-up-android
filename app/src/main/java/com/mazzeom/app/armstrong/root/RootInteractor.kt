@@ -1,6 +1,8 @@
 package com.mazzeom.app.armstrong.root
 
+import android.annotation.SuppressLint
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
+import com.mazzeom.app.armstrong.root.main.MainInteractor
 import com.mazzeom.app.armstrong.root.sign_in.SignInInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
@@ -19,6 +21,7 @@ class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>() {
     @Inject
     lateinit var presenter: RootPresenter
 
+    @SuppressLint("MissingSuperCall")
     override fun didBecomeActive(savedInstanceState: Bundle?) {
         super.didBecomeActive(savedInstanceState)
 
@@ -35,6 +38,13 @@ class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>() {
         override fun login(profile: ProfileDTO) {
             router.detachSignIn()
             router.attachMain(profile)
+        }
+    }
+
+    inner class MainListener: MainInteractor.Listener {
+        override fun logout() {
+            router.detachMain()
+            router.attachSignIn()
         }
     }
 

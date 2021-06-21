@@ -43,7 +43,7 @@ class SignInBuilder(dependency: ParentComponent) : ViewBuilder<SignInView, SignI
   }
 
   interface ParentComponent {
-    fun listener(): SignInInteractor.Listener
+    fun signInListener(): SignInInteractor.Listener
   }
 
   @dagger.Module

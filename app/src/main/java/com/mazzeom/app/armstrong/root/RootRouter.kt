@@ -44,4 +44,12 @@ class RootRouter(
         attachChild(mainRouter!!)
         view.addView(mainRouter!!.view)
     }
+
+    fun detachMain() {
+        if (mainRouter != null) {
+            detachChild(mainRouter!!)
+            view.removeView(mainRouter!!.view)
+            mainRouter = null
+        }
+    }
 }

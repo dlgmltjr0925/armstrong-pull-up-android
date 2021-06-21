@@ -92,6 +92,7 @@ class DailyTabBuilder(dependency: ParentComponent) :
 			fun view(view: DailyTabView): Builder
 
 			fun parentComponent(component: ParentComponent): Builder
+
 			fun build(): Component
 		}
 	}

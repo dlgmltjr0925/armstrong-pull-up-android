@@ -7,6 +7,7 @@ import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.mazzeom.app.armstrong.libs.api.request.PutProfileRequestBody
 import com.mazzeom.app.armstrong.libs.api.response.GetProfileResponse
 import com.mazzeom.app.armstrong.libs.api.response.PutProfileResponse
+import com.mazzeom.app.armstrong.root.main.MainInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Initializer
 import com.uber.rib.core.Interactor
@@ -29,6 +30,7 @@ class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter
   @Inject lateinit var presenter: ProfileTabPresenter
   @Inject lateinit var onChangeProfile: Observable<ProfileDTO>
   @Inject lateinit var profileTabListener: Listener
+//  @Inject lateinit var mainListener: MainInteractor.Listener
 
   lateinit var profile: ProfileDTO
 
@@ -46,6 +48,10 @@ class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter
       Log.d("UpdateProfile", nickname)
       val profile = ProfileDTO(this.profile.id, nickname)
       UpdateProfile(profile).start()
+    }
+
+    presenter.onClickLogout().subscribe {
+//      mainListener.logout()
     }
   }
 
@@ -65,6 +71,7 @@ class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter
   interface ProfileTabPresenter {
     fun setNickname(nickname: String)
     fun onClickSave(): Observable<String>
+    fun onClickLogout(): Observable<String>
   }
 
   inner class UpdateProfile(profile: ProfileDTO): Thread() {

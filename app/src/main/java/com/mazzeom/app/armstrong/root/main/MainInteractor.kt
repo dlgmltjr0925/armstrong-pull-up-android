@@ -66,4 +66,8 @@ class MainInteractor(profile: ProfileDTO) : Interactor<MainInteractor.MainPresen
    * Presenter interface implemented by this RIB's view.
    */
   interface MainPresenter
+
+  interface Listener {
+    fun logout()
+  }
 }

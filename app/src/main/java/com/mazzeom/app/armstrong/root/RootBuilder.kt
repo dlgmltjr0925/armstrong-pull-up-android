@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.root.main.MainBuilder
+import com.mazzeom.app.armstrong.root.main.MainInteractor
+import com.mazzeom.app.armstrong.root.main.profile_tab.ProfileTabBuilder
 import com.mazzeom.app.armstrong.root.sign_in.SignInBuilder
 import com.mazzeom.app.armstrong.root.sign_in.SignInInteractor
 import com.uber.rib.core.InteractorBaseComponent
@@ -16,6 +18,7 @@ import java.lang.annotation.RetentionPolicy.CLASS
 import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Scope
+import javax.inject.Singleton
 
 /**
  * Builder for the {@link RootScope}.
@@ -64,6 +67,13 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
       @JvmStatic
       internal fun signInListener(interactor: RootInteractor): SignInInteractor.Listener {
         return interactor.SignInListener()
+      }
+
+      @RootScope
+      @Provides
+      @JvmStatic
+      internal fun mainListener(interactor: RootInteractor): MainInteractor.Listener {
+        return interactor.MainListener()
       }
 
       @RootScope

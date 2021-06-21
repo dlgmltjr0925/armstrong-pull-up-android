@@ -5,62 +5,66 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:paddingHorizontal="12dp"
-		android:gravity="center">
-
-		<TextView
-			android:id="@+id/dailyDateTextView"
-			android:layout_width="wrap_content"
+		<LinearLayout
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:textColor="@color/white"
-			android:textSize="20sp"
-			android:textFontWeight="500"/>
+			android:orientation="horizontal"
+			android:paddingHorizontal="12dp"
+			android:gravity="center">
 
-		<LinearLayout
-			android:id="@+id/prevDateButton"
-			android:layout_width="48dp"
-			android:layout_height="48dp"
-			android:orientation="vertical"
-			android:gravity="center"
-			android:background="@drawable/daily_date_button_background">
+			<TextView
+				android:id="@+id/dailyDateTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:textColor="@color/white"
+				android:textSize="20sp"
+				android:textFontWeight="500"/>
+
 			<LinearLayout
-				android:layout_width="24dp"
-				android:layout_height="24dp"
+				android:id="@+id/prevDateButton"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
 				android:orientation="vertical"
 				android:gravity="center"
-				android:background="@drawable/daily_date_button_arrow_background">
-				<ImageView
-					android:layout_width="12dp"
-					android:layout_height="12dp"
-					android:src="@drawable/ic_left_arrow"/>
-			</LinearLayout>
-		</LinearLayout>
+				android:background="@drawable/daily_date_button_background">
 
-		<LinearLayout
-			android:id="@+id/nextDateButton"
-			android:layout_width="48dp"
-			android:layout_height="48dp"
-			android:orientation="vertical"
-			android:gravity="center"
-			android:background="@drawable/daily_date_button_background">
+				<LinearLayout
+					android:layout_width="24dp"
+					android:layout_height="24dp"
+					android:orientation="vertical"
+					android:gravity="center"
+					android:background="@drawable/daily_date_button_arrow_background">
+
+					<ImageView
+						android:layout_width="12dp"
+						android:layout_height="12dp"
+						android:src="@drawable/ic_left_arrow"/>
+				</LinearLayout>
+			</LinearLayout>
+
 			<LinearLayout
-				android:layout_width="24dp"
-				android:layout_height="24dp"
+				android:id="@+id/nextDateButton"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
 				android:orientation="vertical"
 				android:gravity="center"
-				android:background="@drawable/daily_date_button_arrow_background">
-				<ImageView
-					android:layout_width="12dp"
-					android:layout_height="12dp"
-					android:src="@drawable/ic_right_arrow"/>
-			</LinearLayout>
-		</LinearLayout>
+				android:background="@drawable/daily_date_button_background">
 
-	</LinearLayout>
+				<LinearLayout
+					android:layout_width="24dp"
+					android:layout_height="24dp"
+					android:orientation="vertical"
+					android:gravity="center"
+					android:background="@drawable/daily_date_button_arrow_background">
+
+					<ImageView
+						android:layout_width="12dp"
+						android:layout_height="12dp"
+						android:src="@drawable/ic_right_arrow"/>
+				</LinearLayout>
+			</LinearLayout>
+
+		</LinearLayout>
 
 </com.mazzeom.app.armstrong.root.main.daily_tab.DailyTabView>

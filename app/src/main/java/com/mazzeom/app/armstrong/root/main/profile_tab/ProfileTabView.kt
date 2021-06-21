@@ -15,6 +15,7 @@ import androidx.core.widget.doOnTextChanged
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.uber.rib.core.Initializer
+import io.reactivex.Emitter
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -26,6 +27,7 @@ class ProfileTabView @JvmOverloads constructor(context: Context, attrs: Attribut
     lateinit var profileImageText: TextView
     lateinit var profileSaveButton: TextView
     lateinit var inputMethodManager: InputMethodManager
+    lateinit var logoutButton: TextView
 
     @Initializer
     override fun onFinishInflate() {
@@ -34,6 +36,7 @@ class ProfileTabView @JvmOverloads constructor(context: Context, attrs: Attribut
         profileImageText = findViewById(R.id.profileImageText)
         profileSaveButton = findViewById(R.id.profileSaveButton)
         inputMethodManager = context.getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager
+        logoutButton = findViewById(R.id.logoutTextView)
 
         profileNickNameEditText.setOnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
@@ -60,6 +63,14 @@ class ProfileTabView @JvmOverloads constructor(context: Context, attrs: Attribut
             profileSaveButton.setOnClickListener {
                 if (profileNickNameEditText.isFocused) profileNickNameEditText.clearFocus()
                 emitter.onNext(profileNickNameEditText.text.toString())
+            }
+        }
+    }
+
+    override fun onClickLogout(): Observable<String> {
+        return Observable.create { emitter ->
+            logoutButton.setOnClickListener {
+                emitter.onNext("")
             }
         }
     }
