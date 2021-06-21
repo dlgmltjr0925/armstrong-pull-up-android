@@ -42,7 +42,7 @@ class FridayBuilder(dependency: ParentComponent) : ViewBuilder<FridayView, Frida
   }
 
   interface ParentComponent {
-    // TODO: Define dependencies required from your parent interactor here.
+    fun fridayListener(): FridayInteractor.Listener
   }
 
   @dagger.Module

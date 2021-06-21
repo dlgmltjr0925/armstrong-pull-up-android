@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.friday.FridayBuilder
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.friday.FridayInteractor
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.monday.MondayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.push_up.PushUpBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.thursday.ThursdayBuilder
@@ -65,6 +66,13 @@ class WeekdayBuilder(dependency: ParentComponent) :
 
 		@dagger.Module
 		companion object {
+
+			@WeekdayScope
+			@Provides
+			@JvmStatic
+			internal fun fridayListener(interactor: WeekdayInteractor): FridayInteractor.Listener {
+				return interactor.FridayListener()
+			}
 
 			@WeekdayScope
 			@Provides

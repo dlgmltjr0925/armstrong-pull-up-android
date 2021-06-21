@@ -6,6 +6,7 @@ import com.mazzeom.app.armstrong.libs.api.Api
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.mazzeom.app.armstrong.libs.api.dto.RecordType
 import com.mazzeom.app.armstrong.libs.api.response.GetRecordByProfileIdAndDateResponse
+import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.friday.FridayInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
@@ -42,6 +43,7 @@ class WeekdayInteractor : Interactor<WeekdayInteractor.WeekdayPresenter, Weekday
     super.didBecomeActive(savedInstanceState)
 
     router.attachPushUpRouter(profile, date)
+    setViewByDayOfWeek(dayOfWeek)
     val category = categoryMap[dayOfWeek]
     category?.run {
       presenter.setCategory(category)
@@ -60,11 +62,44 @@ class WeekdayInteractor : Interactor<WeekdayInteractor.WeekdayPresenter, Weekday
     super.willResignActive()
   }
 
+  fun setViewByDayOfWeek(dayOfWeek: Number) {
+    val category = categoryMap[dayOfWeek.toInt()]
+    category?.run {
+      presenter.setCategory(category)
+    }
+    when(dayOfWeek) {
+      2 -> router.attachMondayRouter(profile, date)
+      3 -> router.attachTuesdayRouter(profile, date)
+      4 -> router.attachWednesdayRouter(profile, date)
+      5 -> router.attachThursdayRouter(profile, date)
+      6 -> GetPullUpRecords().start()
+      else -> null
+    }
+  }
+
   /**
    * Presenter interface implemented by this RIB's view.
    */
   interface WeekdayPresenter {
     fun setCategory(category: Array<String>)
+  }
+
+  inner class FridayListener: FridayInteractor.Listener {
+    override fun onSelectRoutine(dayOfWeek: Int) {
+      val category = categoryMap[dayOfWeek]
+      category?.run {
+        presenter.setCategory(category)
+      }
+      router.detachFridayRouter()
+      when(dayOfWeek) {
+        2 -> router.attachMondayRouter(profile, date)
+        3 -> router.attachTuesdayRouter(profile, date)
+        4 -> router.attachWednesdayRouter(profile, date)
+        5 -> router.attachThursdayRouter(profile, date)
+        6 -> GetPullUpRecords().start()
+        else -> null
+      }
+    }
   }
 
   inner class GetPullUpRecords: Thread() {
@@ -91,18 +126,7 @@ class WeekdayInteractor : Interactor<WeekdayInteractor.WeekdayPresenter, Weekday
                 else -> 6
               }
 
-              val category = categoryMap[dayOfWeek]
-              category?.run {
-                presenter.setCategory(category)
-              }
-              when(dayOfWeek) {
-                2 -> router.attachMondayRouter(profile, date)
-                3 -> router.attachTuesdayRouter(profile, date)
-                4 -> router.attachWednesdayRouter(profile, date)
-                5 -> router.attachThursdayRouter(profile, date)
-                6 -> GetPullUpRecords().start()
-                else -> null
-              }
+              setViewByDayOfWeek(dayOfWeek)
             }
           }
 

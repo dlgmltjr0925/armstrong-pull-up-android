@@ -98,7 +98,7 @@ class WeekdayRouter(
 	fun detachFridayRouter() {
 		if (fridayRouter != null) {
 			detachChild(fridayRouter!!)
-			if (pullUpFrameLayout != null) pullUpFrameLayout!!.removeView(fridayRouter!!.view)
+			if (pullUpFrameLayout != null) pullUpFrameLayout!!.removeAllViews()
 			fridayRouter = null
 		}
 	}

@@ -10,6 +10,7 @@ import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.mazzeom.app.armstrong.R
+import io.reactivex.Observable
 
 /**
  * Top level view for {@link FridayBuilder.FridayScope}.
@@ -19,6 +20,7 @@ class FridayView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
 	val dayOfWeeks: Array<String> = arrayOf("월", "화", "수", "목")
 	val routines: Array<String> = arrayOf("풀업 5세트", "피라미드 루틴", "3그립", "최대 세트수")
+	val routineButtons: MutableList<LinearLayout> = mutableListOf()
 
 	override fun onFinishInflate() {
 		super.onFinishInflate()
@@ -35,11 +37,20 @@ class FridayView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 			routineTextView.text = routines[i]
 
 			val routineButton = item.findViewById<LinearLayout>(R.id.routineButton)
-			routineButton.setOnClickListener {
-				Log.d("FridayView", "${routines[i]}")
-			}
+			routineButtons.add(routineButton)
 
 			this.addView(item)
+		}
+	}
+
+	override fun onClickRoutine(): Observable<Int> {
+		return Observable.create { emitter ->
+			for(i in 0..3) {
+				val routineButton = routineButtons[i]
+				routineButton.setOnClickListener {
+					emitter.onNext(i + 2)
+				}
+			}
 		}
 	}
 }
