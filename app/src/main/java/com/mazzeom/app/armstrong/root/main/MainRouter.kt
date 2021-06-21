@@ -1,6 +1,10 @@
 package com.mazzeom.app.armstrong.root.main
 
+import android.animation.AnimatorSet
+import android.animation.LayoutTransition
+import android.animation.ObjectAnimator
 import android.util.Log
+import android.view.View
 import android.widget.FrameLayout
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.root.main.bottom_navigation.BottomNavigationBuilder
@@ -38,6 +42,11 @@ class MainRouter(
     var profileTabRouter: ProfileTabRouter? = null
     lateinit var frameLayout: FrameLayout
 
+    companion object {
+        val DURATION: Long = 200
+        val TRANSLATION = 30f
+    }
+
     override fun didLoad() {
         super.didLoad()
         frameLayout = view.findViewById<FrameLayout>(R.id.frameLayout)
@@ -49,10 +58,22 @@ class MainRouter(
         view.addView(bottomNavigationRouter!!.view)
     }
 
+    fun addViewWithAnimation(view: View, fromTranslationX: Float = 0f) {
+        view.translationX = fromTranslationX
+        view.alpha = 0.2f
+        frameLayout.addView(view)
+        val set1 = AnimatorSet()
+        set1.play(ObjectAnimator.ofFloat(view, "translationX", 0f).apply { duration = DURATION })
+        val set2 = AnimatorSet()
+        set2.play(ObjectAnimator.ofFloat(view, "alpha", 1f).apply { duration = DURATION })
+        set1.playTogether(set2)
+        set1.start()
+    }
+
     fun attachDailyTab() {
         if (dailyTabRouter == null) dailyTabRouter = dailyTabBuilder.build(view)
         attachChild(dailyTabRouter!!)
-        frameLayout.addView(dailyTabRouter!!.view)
+        addViewWithAnimation(dailyTabRouter!!.view, -TRANSLATION)
     }
 
     fun detachDailyTab() {
@@ -62,10 +83,15 @@ class MainRouter(
         }
     }
 
-    fun attachRecordTab() {
+    fun attachRecordTab(detachedTab: Int = 1) {
         if (recordTabRouter == null) recordTabRouter = recordTabBuilder.build(view)
         attachChild(recordTabRouter!!)
-        frameLayout.addView(recordTabRouter!!.view)
+        val fromTranslationX = when(detachedTab) {
+            0 -> TRANSLATION
+            2 -> -TRANSLATION
+            else -> 0f
+        }
+        addViewWithAnimation(recordTabRouter!!.view, fromTranslationX)
     }
 
     fun detachRecordTab() {
@@ -78,7 +104,7 @@ class MainRouter(
     fun attachProfileTab() {
         if (profileTabRouter == null) profileTabRouter = profileTabBuilder.build(view)
         attachChild(profileTabRouter!!)
-        frameLayout.addView(profileTabRouter!!.view)
+        addViewWithAnimation(profileTabRouter!!.view, TRANSLATION)
     }
 
     fun detachProfileTab() {
@@ -96,7 +122,7 @@ class MainRouter(
         }
         when(nextTabId) {
             0 -> attachDailyTab()
-            1 -> attachRecordTab()
+            1 -> attachRecordTab(currentTabId)
             2 -> attachProfileTab()
         }
     }
