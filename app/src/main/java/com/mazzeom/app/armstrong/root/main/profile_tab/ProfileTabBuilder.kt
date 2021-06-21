@@ -49,6 +49,7 @@ class ProfileTabBuilder(dependency: ParentComponent) : ViewBuilder<ProfileTabVie
   interface ParentComponent {
     fun onChangeProfile(): Observable<ProfileDTO>
     fun profileTablistener(): ProfileTabInteractor.Listener
+    fun mainListener(): MainInteractor.Listener
   }
 
   @dagger.Module

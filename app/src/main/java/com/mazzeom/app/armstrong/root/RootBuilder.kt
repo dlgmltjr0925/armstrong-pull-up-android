@@ -72,7 +72,7 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
       @RootScope
       @Provides
       @JvmStatic
-      internal fun mainListener(interactor: RootInteractor): MainInteractor.Listener {
+      fun mainListener(interactor: RootInteractor): MainInteractor.Listener {
         return interactor.MainListener()
       }
 

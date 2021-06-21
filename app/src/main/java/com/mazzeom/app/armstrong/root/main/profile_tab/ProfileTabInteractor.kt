@@ -30,7 +30,7 @@ class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter
   @Inject lateinit var presenter: ProfileTabPresenter
   @Inject lateinit var onChangeProfile: Observable<ProfileDTO>
   @Inject lateinit var profileTabListener: Listener
-//  @Inject lateinit var mainListener: MainInteractor.Listener
+  @Inject lateinit var mainListener: MainInteractor.Listener
 
   lateinit var profile: ProfileDTO
 
@@ -51,7 +51,7 @@ class ProfileTabInteractor : Interactor<ProfileTabInteractor.ProfileTabPresenter
     }
 
     presenter.onClickLogout().subscribe {
-//      mainListener.logout()
+      mainListener.logout()
     }
   }
 
