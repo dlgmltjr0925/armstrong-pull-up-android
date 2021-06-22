@@ -26,7 +26,11 @@ class ProfileAdapter(private var context: Context, private var profiles: Array<P
     }
 
     override fun getItemId(position: Int): Long {
-        return profiles[position].id.toLong()
+        if (position == profiles.size) {
+            return 0
+        } else {
+            return profiles[position].id.toLong()
+        }
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {

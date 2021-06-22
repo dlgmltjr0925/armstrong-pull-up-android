@@ -1,10 +1,15 @@
 package com.mazzeom.app.armstrong.root.sign_in
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.util.Log
+import androidx.fragment.app.DialogFragment
 import com.mazzeom.app.armstrong.libs.api.Api
 import com.mazzeom.app.armstrong.libs.api.response.GetProfileResponse
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
+import com.mazzeom.app.armstrong.libs.api.request.DeleteProfileRequestBody
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
@@ -34,7 +39,18 @@ class SignInInteractor : Interactor<SignInInteractor.SignInPresenter, SignInRout
     presenter
       .onClickProfile()
       .subscribe { profile ->
-        listener.login(profile)
+        Log.d("onClickProfile", profile.toString())
+        if (profile.id == 0) {
+
+        } else {
+          listener.login(profile)
+        }
+      }
+
+    presenter
+      .onClickDeleteProfile()
+      .subscribe { profile ->
+        DeleteProfileById(profile).start()
       }
   }
 
@@ -50,6 +66,7 @@ class SignInInteractor : Interactor<SignInInteractor.SignInPresenter, SignInRout
   interface SignInPresenter {
     fun setProfiles(profiles: Array<ProfileDTO>)
     fun onClickProfile(): Observable<ProfileDTO>
+    fun onClickDeleteProfile(): Observable<ProfileDTO>
   }
 
   interface Listener {
@@ -74,4 +91,21 @@ class SignInInteractor : Interactor<SignInInteractor.SignInPresenter, SignInRout
       })
     }
   }
+
+  inner class DeleteProfileById(profile: ProfileDTO): Thread() {
+    val profile = profile
+    override fun run() {
+      val service = Api.create()
+      service.deleteProfileRequest(profile.id).enqueue(object : Callback<HashMap<String, Any>> {
+        override fun onResponse(call: Call<HashMap<String, Any>>, response: Response<HashMap<String, Any>>) {
+          GetProfiles().start()
+        }
+
+        override fun onFailure(call: Call<HashMap<String, Any>>, t: Throwable) {
+          Log.d("DeleteProfileById", t.toString())
+        }
+      })
+    }
+  }
+
 }

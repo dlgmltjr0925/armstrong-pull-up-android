@@ -19,9 +19,9 @@ interface ApiService {
         @Body parameters: PutProfileRequestBody
     ): Call<PutProfileResponse>
 
-    @DELETE("profile")
+    @DELETE("profile/{profileId}")
     fun deleteProfileRequest(
-        @Body parameters: DeleteProfileRequestBody
+        @Path("profileId") profileId: Int
     ): Call<HashMap<String, Any>>
 
     @GET("pushup/{profileId}/{date}")

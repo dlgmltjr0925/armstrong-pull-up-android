@@ -4,23 +4,39 @@
   android:layout_height="match_parent"
   android:orientation="vertical" >
 
-  <TextView
+  <FrameLayout
+    android:id="@+id/signInFrameLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="프로필을 선택하세요."
-    android:textAlignment="center"
-    android:textColor="@color/white"
-    android:layout_marginTop="30dp"
-    android:textSize="16sp"/>
+    android:layout_height="match_parent">
 
-  <GridView
-    android:id="@+id/profileGridView"
-    android:layout_width="290dp"
-    android:layout_height="wrap_content"
-    android:numColumns="2"
-    android:layout_gravity="center"
-    android:layout_marginTop="100dp"
-    android:gravity="center"
-    android:verticalSpacing="30dp"/>
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="프로필을 선택하세요."
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:textSize="16sp"/>
+
+      <GridView
+        android:id="@+id/profileGridView"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:verticalSpacing="30dp"/>
+
+    </LinearLayout>
+
+  </FrameLayout>
+
+
 
 </com.mazzeom.app.armstrong.root.sign_in.SignInView>
