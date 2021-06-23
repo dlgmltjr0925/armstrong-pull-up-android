@@ -11,20 +11,15 @@ import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.uber.rib.core.Initializer
 import io.reactivex.Observable
+import me.rajin.butterkt.bindView
 
 /**
  * Top level view for {@link SignInBuilder.SignInScope}.
  */
 class SignInView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : LinearLayout(context, attrs, defStyle),
     SignInInteractor.SignInPresenter {
-    private lateinit var profileGridView: GridView;
+    private val profileGridView by bindView<GridView>(R.id.profileGridView);
     private var profiles: Array<ProfileDTO> = arrayOf()
-
-    @Initializer
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        profileGridView = findViewById(R.id.profileGridView)
-    }
 
     override fun setProfiles(profiles: Array<ProfileDTO>) {
         this.profiles = profiles
