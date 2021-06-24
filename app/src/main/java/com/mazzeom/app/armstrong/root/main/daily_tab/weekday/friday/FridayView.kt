@@ -3,10 +3,7 @@ package com.mazzeom.app.armstrong.root.main.daily_tab.weekday.friday
 import android.app.Service
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.mazzeom.app.armstrong.R

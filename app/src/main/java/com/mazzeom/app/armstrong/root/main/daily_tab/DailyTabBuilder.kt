@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mazzeom.app.armstrong.R
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
+import com.mazzeom.app.armstrong.root.main.daily_tab.count_input.CountInputBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekday.WeekdayBuilder
 import com.mazzeom.app.armstrong.root.main.daily_tab.weekend.WeekendBuilder
 import com.uber.rib.core.InteractorBaseComponent
@@ -68,7 +69,14 @@ class DailyTabBuilder(dependency: ParentComponent) :
 				view: DailyTabView,
 				interactor: DailyTabInteractor
 			): DailyTabRouter {
-				return DailyTabRouter(view, interactor, component, WeekendBuilder(component), WeekdayBuilder(component))
+				return DailyTabRouter(
+					view,
+					interactor,
+					component,
+					WeekendBuilder(component),
+					WeekdayBuilder(component),
+					CountInputBuilder(component)
+				)
 			}
 		}
 
@@ -81,6 +89,7 @@ class DailyTabBuilder(dependency: ParentComponent) :
 		InteractorBaseComponent<DailyTabInteractor>,
 		WeekendBuilder.ParentComponent,
 		WeekdayBuilder.ParentComponent,
+		CountInputBuilder.ParentComponent,
 		BuilderComponent {
 
 		@dagger.Component.Builder

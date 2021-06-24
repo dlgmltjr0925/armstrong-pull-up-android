@@ -50,6 +50,8 @@ class DailyTabInteractor : Interactor<DailyTabInteractor.DailyTabPresenter, Dail
     presenter.onClickNextDateButton().subscribe {
       updateDate(1)
     }
+
+    router.attachCountInput()
   }
 
   override fun willResignActive() {
