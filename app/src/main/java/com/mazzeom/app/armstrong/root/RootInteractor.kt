@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import com.mazzeom.app.armstrong.libs.api.dto.ProfileDTO
 import com.mazzeom.app.armstrong.root.main.MainInteractor
 import com.mazzeom.app.armstrong.root.sign_in.SignInInteractor
+import com.mazzeom.app.armstrong.root.sign_up.SignUpInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
@@ -38,6 +39,23 @@ class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>() {
         override fun login(profile: ProfileDTO) {
             router.detachSignIn()
             router.attachMain(profile)
+        }
+
+        override fun signUp() {
+            router.detachSignIn()
+            router.attachSignUp()
+        }
+    }
+
+    inner class SignUpListener: SignUpInteractor.Listener {
+        override fun signUp(profile: ProfileDTO) {
+            router.detachSignUp()
+            router.attachSignIn()
+        }
+
+        override fun goBack() {
+            router.detachSignUp()
+            router.attachSignIn()
         }
     }
 

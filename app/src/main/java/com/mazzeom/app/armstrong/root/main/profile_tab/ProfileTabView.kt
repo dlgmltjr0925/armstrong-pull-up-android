@@ -45,7 +45,7 @@ class ProfileTabView @JvmOverloads constructor(context: Context, attrs: Attribut
         }
 
         profileNickNameEditText.doOnTextChanged { text, start, before, count ->
-            val nickname = text.toString()
+            val nickname = text.toString().trim()
             profileImageText.text = when(nickname.length) {
                 0 -> ""
                 2 -> nickname.slice(0..1).toUpperCase()

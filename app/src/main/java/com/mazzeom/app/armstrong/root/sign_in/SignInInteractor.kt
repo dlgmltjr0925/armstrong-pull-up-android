@@ -41,7 +41,7 @@ class SignInInteractor : Interactor<SignInInteractor.SignInPresenter, SignInRout
       .subscribe { profile ->
         Log.d("onClickProfile", profile.toString())
         if (profile.id == 0) {
-
+          listener.signUp()
         } else {
           listener.login(profile)
         }
@@ -71,6 +71,7 @@ class SignInInteractor : Interactor<SignInInteractor.SignInPresenter, SignInRout
 
   interface Listener {
     fun login(profile: ProfileDTO)
+    fun signUp()
   }
 
   inner class GetProfiles: Thread() {

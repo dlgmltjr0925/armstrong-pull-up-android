@@ -5,6 +5,8 @@ import com.mazzeom.app.armstrong.root.main.MainBuilder
 import com.mazzeom.app.armstrong.root.main.MainRouter
 import com.mazzeom.app.armstrong.root.sign_in.SignInBuilder
 import com.mazzeom.app.armstrong.root.sign_in.SignInRouter
+import com.mazzeom.app.armstrong.root.sign_up.SignUpBuilder
+import com.mazzeom.app.armstrong.root.sign_up.SignUpRouter
 
 import com.uber.rib.core.ViewRouter
 
@@ -18,12 +20,15 @@ class RootRouter(
     interactor: RootInteractor,
     component: RootBuilder.Component,
     signInBuilder: SignInBuilder,
+    signUpBuilder: SignUpBuilder,
     mainBuilder: MainBuilder
 ) : ViewRouter<RootView, RootInteractor>(view, interactor, component) {
     val signInBuilder: SignInBuilder = signInBuilder
+    val signUpBuilder: SignUpBuilder = signUpBuilder
     val mainBuilder: MainBuilder = mainBuilder
 
     var signInRouter: SignInRouter? = null
+    var signUpRouter: SignUpRouter? = null
     var mainRouter: MainRouter? = null
 
     fun attachSignIn() {
@@ -36,6 +41,19 @@ class RootRouter(
         if (signInRouter != null) {
             detachChild(signInRouter!!)
             view.removeView(signInRouter!!.view)
+        }
+    }
+
+    fun attachSignUp() {
+        signUpRouter = signUpBuilder.build(view)
+        attachChild(signUpRouter!!)
+        view.addView(signUpRouter!!.view)
+    }
+
+    fun detachSignUp() {
+        if (signUpRouter != null) {
+            detachChild(signUpRouter!!)
+            view.removeView(signUpRouter!!.view)
         }
     }
 

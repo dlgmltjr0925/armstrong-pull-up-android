@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mazzeom.app.armstrong.root.sign_up.SignUpView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/black">
+
+	<include
+		android:id="@+id/actionBar"
+		layout="@layout/action_bar"/>
+
+	<TextView
+		android:id="@+id/profileImageText"
+		android:layout_width="150dp"
+		android:layout_height="150dp"
+		android:layout_gravity="center"
+		android:layout_marginTop="60dp"
+		android:background="@drawable/sign_in_profile_item_image_bg"
+		android:textAlignment="center"
+		android:gravity="center"
+		android:textColor="@color/white"
+		android:textSize="42sp"/>
+
+	<EditText
+		android:id="@+id/profileNickNameEditText"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="60dp"
+		android:layout_marginHorizontal="30dp"
+		android:paddingVertical="5dp"
+		android:paddingHorizontal="10dp"
+		android:inputType="text"
+		android:hint="Insert Nickname"
+		android:textColorHint="@color/edit_text_hint_color"
+		android:textColor="@color/white"
+		android:background="@drawable/edit_text_background"
+		android:textCursorDrawable="@drawable/edit_text_cursor"
+		android:maxLength="20"
+		android:focusableInTouchMode="true"
+		android:clickable="true"
+		android:focusable="true"/>
+
+	<TextView
+		android:id="@+id/enrollButton"
+		android:visibility="invisible"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="30dp"
+		android:layout_marginHorizontal="30dp"
+		android:paddingVertical="10dp"
+		android:layout_gravity="center_horizontal"
+		android:text="등록"
+		android:textColor="@color/white"
+		android:textAlignment="center"
+		android:background="@color/button_pressed_background"/>
+
+</com.mazzeom.app.armstrong.root.sign_up.SignUpView>
